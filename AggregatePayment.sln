@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pay.Alipay", "Alipay\Pay.Alipay.csproj", "{DDBBF123-D3DF-47CA-B3C7-9A1BE37C3B46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pay.Alipay", "Pay.Alipay\Pay.Alipay.csproj", "{DDBBF123-D3DF-47CA-B3C7-9A1BE37C3B46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pay.Infrastructure", "Pay.Infrastructure\Pay.Infrastructure.csproj", "{1C944A96-4720-4EC4-B62B-DECE70537BA6}"
 EndProject

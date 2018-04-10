@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Alipay.Util;
 
-namespace Alipay.Request
+namespace Pay.Alipay
 {
     /// <summary>
     /// Alipay上传请求接口，支持同时上传多个文件。

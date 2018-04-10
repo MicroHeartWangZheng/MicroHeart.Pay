@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using System.IO;
-namespace Alipay.Util
+
+namespace Pay.Alipay.Util
 {
     class AlipayEncrypt
     {

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace Alipay.Util
+namespace Pay.Alipay.Util
 {
     public static class RSACryptoServiceProviderExtension
     {

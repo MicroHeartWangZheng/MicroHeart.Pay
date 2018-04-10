@@ -5,7 +5,7 @@ using System.Web;
 using System.IO;
 using System.ComponentModel;
 
-namespace Alipay.Util
+namespace Pay.Alipay.Util
 {
     /// <summary>
     /// RSA签名工具类。

@@ -1,6 +1,6 @@
-﻿using Alipay.Request;
+﻿using Pay.Alipay;
 
-namespace Alipay
+namespace Pay.Alipay
 {
     /// <summary>
     /// Alipay客户端。

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Alipay.Util
+namespace Pay.Alipay.Util
 {
     /// <summary>
     /// 文件元数据。

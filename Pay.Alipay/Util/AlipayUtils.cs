@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Jayrock.Json.Conversion;
 
-namespace Alipay.Util
+namespace Pay.Alipay.Util
 {
     /// <summary>
     public abstract class AlipayUtils

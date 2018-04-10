@@ -1,9 +1,9 @@
 using System;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-using Alipay.Models;
+using Pay.Alipay.Models;
 
-namespace Alipay.Response
+namespace Pay.Alipay.Response
 {
     /// <summary>
     /// AlipayTradePayResponse.

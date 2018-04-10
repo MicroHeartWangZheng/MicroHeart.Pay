@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Alipay.Request;
+using Pay.Alipay.Request;
 using Alipay.Util;
 using System.Text;
 using System.Web;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Net;
 
 using System.Xml;
-namespace Alipay
+namespace Pay.Alipay
 {
     /// <summary>
     /// Alipay客户端。

@@ -2,7 +2,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace Alipay
+namespace Pay.Alipay
 {
     public abstract class AlipayResponse:BaseResponse
     {

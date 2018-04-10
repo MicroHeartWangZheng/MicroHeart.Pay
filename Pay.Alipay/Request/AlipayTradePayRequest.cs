@@ -1,9 +1,9 @@
 using System;
 using Alipay.Models;
 using System.Collections.Generic;
-using Alipay.Response;
+using Pay.Alipay.Response;
 
-namespace Alipay.Request
+namespace Pay.Alipay.Request
 {
     /// <summary>
     /// Alipay API: alipay.trade.pay

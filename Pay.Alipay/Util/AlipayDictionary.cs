@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alipay
+namespace Pay.Alipay.Util
 {
     /// <summary>
     /// 符合Alipay习惯的纯字符串字典结构。

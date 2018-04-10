@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 
-namespace Alipay.Request
+namespace Pay.Alipay
 {
 
     public abstract class IAlipayRequest<T> where T : AlipayResponse

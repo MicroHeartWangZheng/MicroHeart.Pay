@@ -4,7 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Alipay.Util
+namespace Pay.Alipay.Util
 {
     public class AlipaySignature
     {
