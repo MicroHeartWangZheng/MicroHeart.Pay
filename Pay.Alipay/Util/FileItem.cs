@@ -45,8 +45,11 @@ namespace Pay.Alipay.Util
         /// <param name="content">文件字节流</param>
         public FileItem(string fileName, byte[] content)
         {
-            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException("fileName");
-            if (content == null || content.Length == 0) throw new ArgumentNullException("content");
+            if (string.IsNullOrEmpty(fileName))
+                throw new ArgumentNullException("fileName");
+
+            if (content == null || content.Length == 0)
+                throw new ArgumentNullException("content");
 
             this.fileName = fileName;
             this.content = content;
@@ -61,7 +64,8 @@ namespace Pay.Alipay.Util
         public FileItem(String fileName, byte[] content, String mimeType)
             : this(fileName, content)
         {
-            if (string.IsNullOrEmpty(mimeType)) throw new ArgumentNullException("mimeType");
+            if (string.IsNullOrEmpty(mimeType))
+                throw new ArgumentNullException("mimeType");
             this.mimeType = mimeType;
         }
 
@@ -93,7 +97,6 @@ namespace Pay.Alipay.Util
                     fileStream.Read(content, 0, content.Length);
                 }
             }
-
             return this.content;
         }
     }

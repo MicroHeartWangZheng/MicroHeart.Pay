@@ -7,7 +7,7 @@ namespace Pay.Infrastructure
 {
     public abstract class BaseRequest<TResponse> : IRequest<TResponse> where TResponse : BaseResponse, new()
     {
-        private IDictionary<string, object> _parameters = null;
+        private IDictionary<string, object> Parameters = null;
         /// <summary>
         /// 获取API名称
         /// </summary>
@@ -19,11 +19,11 @@ namespace Pay.Infrastructure
         /// <returns></returns>
         public virtual IDictionary<string, object> GetParameters()
         {
-            if (_parameters != null)
-                return _parameters;
+            if (Parameters != null)
+                return Parameters;
             var properties = this.GetType().GetProperties().Where(m => m != null);
-            _parameters = properties.ToDictionary(m => m.Name, n => n.GetValue(this, null));
-            return _parameters;
+            Parameters = properties.ToDictionary(m => m.Name, n => n.GetValue(this, null));
+            return Parameters;
         }
         /// <summary>
         /// 客户端参数检查，减少服务端无效调用

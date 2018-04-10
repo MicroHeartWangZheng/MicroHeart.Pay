@@ -7,8 +7,7 @@ using System.Text;
 namespace Pay.Alipay.Util
 {
     public abstract class AlipayUtils
-    {    /// Alipay系统工具类。
-         /// </summary>
+    {   
 
 
         /// <summary>m>

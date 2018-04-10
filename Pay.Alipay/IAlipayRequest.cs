@@ -21,7 +21,6 @@ namespace Pay.Alipay
             if (_parameters != null)
                 return _parameters;
             var properties = this.GetType().GetProperties().Where(m => m != null);
-            //_parameters = properties.ToDictionary(m => m.Name, n => (object)HttpUtility.UrlEncode(n.GetValue(this, null).ToString()));
             _parameters = properties.ToDictionary(m => m.Name, n => n.GetValue(this, null));
             return _parameters;
         }
