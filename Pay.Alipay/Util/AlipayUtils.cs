@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using Jayrock.Json.Conversion;
 
 namespace Pay.Alipay.Util
 {
-    /// <summary>
     public abstract class AlipayUtils
     {    /// Alipay系统工具类。
-    /// </summary>
+         /// </summary>
 
 
         /// <summary>m>
@@ -33,15 +31,15 @@ namespace Pay.Alipay.Util
         /// <param name="parameters">所有字符型的Alipay请求参数</param>
         /// <param name="privateKeyPem">签名密钥</param>
         /// <returns>签名</returns>
-        public static string SignAlipayRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, string signType)
-        {
-            return AlipaySignature.RSASign(parameters, privateKeyPem, charset, signType);
-        }
+        //public static string SignAlipayRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, string signType)
+        //{
+        //    return AlipaySignature.RSASign(parameters, privateKeyPem, charset, signType);
+        //}
 
-        public static string SignAlipayRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, bool keyFromFile,string signType)
-        {
-            return AlipaySignature.RSASign(parameters, privateKeyPem, charset, keyFromFile,signType);
-        }
+        //public static string SignAlipayRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, bool keyFromFile, string signType)
+        //{
+        //    return AlipaySignature.RSASign(parameters, privateKeyPem, charset, keyFromFile, signType);
+        //}
 
 
         /// <summary>
@@ -172,9 +170,9 @@ namespace Pay.Alipay.Util
             return api + "_response";
         }
 
-        public static IDictionary ParseJson(string body)
-        {
-            return JsonConvert.Import(body) as IDictionary;
-        }
+        //public static IDictionary ParseJson(string body)
+        //{
+        //    return JsonConvert.Import(body) as IDictionary;
+        //}
     }
 }
