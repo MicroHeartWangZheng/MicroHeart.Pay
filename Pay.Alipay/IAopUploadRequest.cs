@@ -1,5 +1,4 @@
-﻿using Pay.Alipay.Util;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Pay.Alipay
 {

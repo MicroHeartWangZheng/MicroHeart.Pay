@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 
 namespace Pay.Infrastructure
 {
-    public interface IClient
+    public interface IApiClient
     {
         InterfaceConfiguration InterfaceConfiguration { set; get; }
-        /// <summary>
-        /// 设置或获取第三方接口的系统名称
-        /// </summary>
-        string SystemName { get; }
+
         /// <summary>
         /// 获取第三方接口的名称
         /// </summary>

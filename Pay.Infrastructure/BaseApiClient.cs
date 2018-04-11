@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Pay.Infrastructure
 {
-    public abstract class BaseApiClient : IClient
+    public abstract class BaseApiClient : IApiClient
     {
         protected static HttpClient httpClient;
         public InterfaceConfiguration InterfaceConfiguration { set; get; }
@@ -74,7 +74,6 @@ namespace Pay.Infrastructure
                 {
                     Content = GetRequestContent(request) //生成请求对象
                 };
-
 
                 var requestBody = string.Empty;
                 if (requestMessage.Content != null)
@@ -208,11 +207,6 @@ namespace Pay.Infrastructure
         /// <param name="request"></param>
         /// <returns></returns>
         public abstract string GetSign(IRequest request);
-
-        /// <summary>
-        /// 设置或获取第三方接口的系统名称
-        /// </summary>
-        public abstract string SystemName { get; }
 
         /// <summary>
         /// 获取第三方接口的名称

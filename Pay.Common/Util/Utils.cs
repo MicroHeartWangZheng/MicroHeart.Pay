@@ -23,24 +23,6 @@ namespace Pay.Common.Util
         }
 
         /// <summary>
-        /// 给Alipay请求签名。
-        /// <remarks>建议使用<code>AlipaySignature.RSASign(parameters, privateKeyPem)</code>></remarks>
-        /// </summary>
-        /// <param name="parameters">所有字符型的Alipay请求参数</param>
-        /// <param name="privateKeyPem">签名密钥</param>
-        /// <returns>签名</returns>
-        //public static string SignAlipayRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, string signType)
-        //{
-        //    return AlipaySignature.RSASign(parameters, privateKeyPem, charset, signType);
-        //}
-
-        //public static string SignAlipayRequest(IDictionary<string, string> parameters, string privateKeyPem, string charset, bool keyFromFile, string signType)
-        //{
-        //    return AlipaySignature.RSASign(parameters, privateKeyPem, charset, keyFromFile, signType);
-        //}
-
-
-        /// <summary>
         /// 清除字典中值为空的项。
         /// </summary>
         /// <param name="dict">待清除的字典</param>
@@ -59,7 +41,6 @@ namespace Pay.Common.Util
                     newDict.Add(name, value);
                 }
             }
-
             return newDict;
         }
 
@@ -115,7 +96,6 @@ namespace Pay.Common.Util
                 case "BMP": mimeType = "image/bmp"; break;
                 default: mimeType = "application/octet-stream"; break;
             }
-
             return mimeType;
         }
 
@@ -167,11 +147,6 @@ namespace Pay.Common.Util
             }
             return api + "_response";
         }
-
-        //public static IDictionary ParseJson(string body)
-        //{
-        //    return JsonConvert.Import(body) as IDictionary;
-        //}
 
         /// <summary>
         /// 获取TimeStamp

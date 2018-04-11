@@ -22,9 +22,10 @@ namespace Pay.Infrastructure
         /// 设置或获取第三方接口的MediaType
         /// </summary>
         public string MediaType { set; get; }
+       
         /// <summary>
-        /// 设置或获取接口所配置的商户Id
+        /// 编码格式
         /// </summary>
-        public string StoreId { set; get; }
+        public string Charset { get; set; }
     }
 }
