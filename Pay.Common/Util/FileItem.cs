@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
     /// <summary>
     /// 文件元数据。
@@ -12,10 +12,10 @@ namespace Pay.Alipay.Util
     /// </summary>
     public class FileItem
     {
-        private string fileName;
-        private string mimeType;
-        private byte[] content;
-        private FileInfo fileInfo;
+        private string FileName;
+        private string MimeType;
+        private byte[] Content;
+        private FileInfo FileInfo;
 
         /// <summary>
         /// 基于本地文件的构造器。
@@ -27,7 +27,7 @@ namespace Pay.Alipay.Util
             {
                 throw new ArgumentException("fileInfo is null or not exists!");
             }
-            this.fileInfo = fileInfo;
+            this.FileInfo = fileInfo;
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Pay.Alipay.Util
             if (content == null || content.Length == 0)
                 throw new ArgumentNullException("content");
 
-            this.fileName = fileName;
-            this.content = content;
+            this.FileName = fileName;
+            this.Content = content;
         }
 
         /// <summary>
@@ -66,38 +66,38 @@ namespace Pay.Alipay.Util
         {
             if (string.IsNullOrEmpty(mimeType))
                 throw new ArgumentNullException("mimeType");
-            this.mimeType = mimeType;
+            this.MimeType = mimeType;
         }
 
         public string GetFileName()
         {
-            if (this.fileName == null && this.fileInfo != null && this.fileInfo.Exists)
+            if (this.FileName == null && this.FileInfo != null && this.FileInfo.Exists)
             {
-                this.fileName = this.fileInfo.FullName;
+                this.FileName = this.FileInfo.FullName;
             }
-            return this.fileName;
+            return this.FileName;
         }
 
         public string GetMimeType()
         {
-            if (this.mimeType == null)
+            if (this.MimeType == null)
             {
-                this.mimeType = AlipayUtils.GetMimeType(GetContent());
+                this.MimeType = Utils.GetMimeType(GetContent());
             }
-            return this.mimeType;
+            return this.MimeType;
         }
 
         public byte[] GetContent()
         {
-            if (this.content == null && this.fileInfo != null && this.fileInfo.Exists)
+            if (this.Content == null && this.FileInfo != null && this.FileInfo.Exists)
             {
-                using (Stream fileStream = this.fileInfo.OpenRead())
+                using (Stream fileStream = this.FileInfo.OpenRead())
                 {
-                    this.content = new byte[fileStream.Length];
-                    fileStream.Read(content, 0, content.Length);
+                    this.Content = new byte[fileStream.Length];
+                    fileStream.Read(Content, 0, Content.Length);
                 }
             }
-            return this.content;
+            return this.Content;
         }
     }
 }

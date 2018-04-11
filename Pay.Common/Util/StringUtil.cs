@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
     public class StringUtil
     {

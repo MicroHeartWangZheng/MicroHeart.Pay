@@ -4,9 +4,9 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
-    public class AlipayEncrypt
+    public class Encrypt
     {
 
         /// <summary>

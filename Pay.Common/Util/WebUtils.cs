@@ -6,7 +6,7 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
     /// <summary>
     /// 网络工具类。

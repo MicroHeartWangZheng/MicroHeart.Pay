@@ -4,9 +4,9 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
- //   public class AlipaySignature
+ //   public class Signature
  //   {
  //       /** 默认编码字符集 */
  //       private static string DEFAULT_CHARSET = "GBK";

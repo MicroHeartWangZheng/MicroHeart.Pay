@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
     /// <summary>
     /// 符合Alipay习惯的纯字符串字典结构。
     /// </summary>
-    public class AlipayDictionary : Dictionary<string, string>
+    public class Dictionary : Dictionary<string, string>
     {
         private const string DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-        public AlipayDictionary() { }
+        public Dictionary() { }
 
-        public AlipayDictionary(IDictionary<string, string> dictionary)
+        public Dictionary(IDictionary<string, string> dictionary)
             : base(dictionary)
         { }
 

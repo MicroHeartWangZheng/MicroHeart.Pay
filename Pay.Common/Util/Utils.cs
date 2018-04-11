@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Pay.Alipay.Util
+namespace Pay.Common.Util
 {
-    public abstract class AlipayUtils
-    {   
-
+    public abstract class Utils
+    {
 
         /// <summary>m>
         /// <param name="bizContent"></param>
@@ -19,7 +18,7 @@ namespace Pay.Alipay.Util
         /// <returns></returns>
         public static string AesEncrypt(string encryptKey, string bizContent, string charset)
         {
-            return AlipayEncrypt.AesEncrypt(encryptKey, bizContent, charset);
+            return Encrypt.AesEncrypt(encryptKey, bizContent, charset);
 
         }
 
@@ -173,5 +172,16 @@ namespace Pay.Alipay.Util
         //{
         //    return JsonConvert.Import(body) as IDictionary;
         //}
+
+        /// <summary>
+        /// 获取TimeStamp
+        /// </summary>
+        /// <returns></returns>
+        public static long GetTimestamp()
+        {
+            var startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
+
+            return (long)(DateTime.UtcNow - startTime).TotalMilliseconds;
+        }
     }
 }
