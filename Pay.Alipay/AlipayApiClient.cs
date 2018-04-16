@@ -60,7 +60,7 @@ namespace Pay.Alipay
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().DictionaryToSortQueryParameters());
 
-            return Signature.RSASign(dic,"xxx","utf-8","RSA2");
+            return Signature.RSASign(dic,"xxx", this.InterfaceConfiguration.Charset, "RSA2");
         }
 
 
