@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 namespace Pay.Common.Util
 {
-    public abstract class Utils
+    public static class Utils
     {
 
         /// <summary>m>
@@ -157,6 +159,35 @@ namespace Pay.Common.Util
             var startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
 
             return (long)(DateTime.UtcNow - startTime).TotalMilliseconds;
+        }
+
+        /// <summary>
+        /// 将指定的字典转换成按属性名称排序过的查询参数
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <param name="urlencode"></param>
+        /// <param name="exclude">排除的参数</param>
+        /// <returns></returns>
+        public static string DictionaryToSortQueryParameters(this IDictionary<string, object> dict, bool urlencode = false, params string[] exclude)
+        {
+            var sortDict = dict.OrderBy(m => m.Key).Select(m =>
+            {
+                if (m.Value == null || exclude.Contains(m.Key))
+                    return null;
+                var val = m.Value.ToString();
+                var encodeVal = "";
+                if (urlencode)
+                {
+                    encodeVal += HttpUtility.UrlEncode(val.ToString());
+                }
+                else
+                {
+                    encodeVal = val;
+                }
+                return $"{m.Key}={encodeVal}";
+            }).Where(m => m != null);
+            var result = string.Join("&", sortDict.ToArray());
+            return result;
         }
     }
 }
