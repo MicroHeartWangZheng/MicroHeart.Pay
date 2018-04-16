@@ -45,8 +45,6 @@ namespace Pay.Alipay
             dic.Add("biz_content", request.GetParameters().DictionaryToSortQueryParameters());
 
             return JsonConvert.SerializeObject(dic);
-
-
         }
 
         public override string GetSign(IRequest request)
