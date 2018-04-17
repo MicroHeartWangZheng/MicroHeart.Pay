@@ -19,7 +19,7 @@ namespace Pay.Test
             WeChatPayClient weChatPayClient = new WeChatPayClient(new myWeChatPayOptions());
             await weChatPayClient.ExecuteAsync<WeChatPayMicroPayResponse>(new WeChatPayMicroPayRequest()
             {
-
+                //这种就可以了
             });
 
         }
