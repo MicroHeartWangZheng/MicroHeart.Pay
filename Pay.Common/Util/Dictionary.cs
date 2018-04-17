@@ -14,7 +14,7 @@ namespace Pay.Common.Util
         /// <param name="urlencode"></param>
         /// <param name="exclude">排除的参数</param>
         /// <returns></returns>
-        public static string DictionaryToSortQueryParameters(this IDictionary<string, object> dict, bool urlencode = false, params string[] exclude)
+        public static string ToSortQueryParameters(this IDictionary<string, object> dict, bool urlencode = false, params string[] exclude)
         {
             var sortDict = dict.OrderBy(m => m.Key).Select(m =>
             {
@@ -34,6 +34,43 @@ namespace Pay.Common.Util
             }).Where(m => m != null);
             var result = string.Join("&", sortDict.ToArray());
             return result;
+        }
+
+        /// <summary>
+        /// 将字典对象转换为Xml字符串
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static string ToXmlString(this IDictionary<string,object> dic)
+        {
+            if(dic.Count==0)
+            {
+                throw new Exception();
+            }
+            string xml = "<xml>";
+            foreach (KeyValuePair<string, object> pair in dic)
+            {
+                //字段值不能为null，会影响后续流程
+                if (pair.Value == null)
+                {
+                    throw new Exception("dic内部含有值为null的字段!");
+                }
+
+                if (pair.Value.GetType() == typeof(int))
+                {
+                    xml += "<" + pair.Key + ">" + pair.Value + "</" + pair.Key + ">";
+                }
+                else if (pair.Value.GetType() == typeof(string))
+                {
+                    xml += "<" + pair.Key + ">" + "<![CDATA[" + pair.Value + "]]></" + pair.Key + ">";
+                }
+                else//除了string和int类型不能含有其他数据类型
+                {
+                    throw new Exception("WxPayData字段数据类型错误!");
+                }
+            }
+            xml += "</xml>";
+            return xml;
         }
     }
 }

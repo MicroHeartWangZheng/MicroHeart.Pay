@@ -29,5 +29,7 @@ namespace Pay.Common.Util
                 return BitConverter.ToString(hsah).Replace("-", "");
             }
         }
+
+        
     }
 }

@@ -40,7 +40,7 @@ namespace Pay.Alipay
             dic.Add("sign", GetSign(request));
             dic.Add("timestamp", Common.Util.Tools.GetTimestamp().ToString());
             dic.Add("version", "1.0");
-            dic.Add("biz_content", request.GetParameters().DictionaryToSortQueryParameters());
+            dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
 
             return JsonConvert.SerializeObject(dic);
         }
@@ -54,7 +54,7 @@ namespace Pay.Alipay
             dic.Add("sign_type", "RSA2");
             dic.Add("timestamp", Common.Util.Tools.GetTimestamp().ToString());
             dic.Add("version", "1.0");
-            dic.Add("biz_content", request.GetParameters().DictionaryToSortQueryParameters());
+            dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
 
             return Signature.RSASign(dic,"xxx", this.InterfaceConfiguration.Charset, "RSA2");
         }

@@ -56,7 +56,7 @@ namespace Pay.Common.Util
         {
             return RSASignCharSet(data, privateKeyPem, charset, keyFromFile, signType);
         }
-        
+
         public static string RSASignCharSet(string data, string privateKeyPem, string charset, string signType)
         {
             RSACryptoServiceProvider rsaCsp = LoadCertificateFile(privateKeyPem, signType);
@@ -131,7 +131,7 @@ namespace Pay.Common.Util
             }
             catch (Exception ex)
             {
-                throw new Exception("您使用的私钥格式错误，请检查RSA私钥配置" + ",charset = " + charset);
+                throw new Exception("您使用的私钥格式错误，请检查RSA私钥配置" + ",charset = " + charset + ex.Message);
             }
             return Convert.ToBase64String(signatureBytes);
         }
@@ -320,7 +320,7 @@ namespace Pay.Common.Util
 
         }
 
-        public static string CheckSignAndDecrypt(IDictionary<string, string> parameters, string alipayPublicKey,string cusPrivateKey, bool isCheckSign, bool isDecrypt)
+        public static string CheckSignAndDecrypt(IDictionary<string, string> parameters, string alipayPublicKey, string cusPrivateKey, bool isCheckSign, bool isDecrypt)
         {
             string charset = parameters["charset"];
             string bizContent = parameters["biz_content"];
@@ -340,7 +340,7 @@ namespace Pay.Common.Util
             return bizContent;
         }
 
-        public static string CheckSignAndDecrypt(IDictionary<string, string> parameters, string alipayPublicKey,string cusPrivateKey, bool isCheckSign,bool isDecrypt, string signType, bool keyFromFile)
+        public static string CheckSignAndDecrypt(IDictionary<string, string> parameters, string alipayPublicKey, string cusPrivateKey, bool isCheckSign, bool isDecrypt, string signType, bool keyFromFile)
         {
             string charset = parameters["charset"];
             string bizContent = parameters["biz_content"];
@@ -360,7 +360,7 @@ namespace Pay.Common.Util
             return bizContent;
         }
 
-        public static string encryptAndSign(string bizContent, string alipayPublicKey,string cusPrivateKey, string charset, bool isEncrypt,bool isSign, string signType, bool keyFromFile)
+        public static string encryptAndSign(string bizContent, string alipayPublicKey, string cusPrivateKey, string charset, bool isEncrypt, bool isSign, string signType, bool keyFromFile)
         {
             StringBuilder sb = new StringBuilder();
             if (string.IsNullOrEmpty(charset))
@@ -398,7 +398,7 @@ namespace Pay.Common.Util
             return sb.ToString();
         }
 
-        public static string encryptAndSign(string bizContent, string alipayPublicKey,string cusPrivateKey, string charset, bool isEncrypt,bool isSign)
+        public static string encryptAndSign(string bizContent, string alipayPublicKey, string cusPrivateKey, string charset, bool isEncrypt, bool isSign)
         {
             StringBuilder sb = new StringBuilder();
             if (string.IsNullOrEmpty(charset))
@@ -640,8 +640,8 @@ namespace Pay.Common.Util
                 }
                 catch (Exception ex)
                 {
+                    throw new Exception(ex.Message);
                 }
-                return null;
             }
         }
 
@@ -659,9 +659,8 @@ namespace Pay.Common.Util
             }
             catch (Exception ex)
             {
-                //    throw new AlipayException("EncryptContent = woshihaoren,zheshiyigeceshi,wanerde", ex);
+                  throw new Exception("EncryptContent = woshihaoren,zheshiyigeceshi,wanerde", ex);
             }
-            return null;
         }
 
         private static RSACryptoServiceProvider DecodeRSAPrivateKey(byte[] privkey, string signType)

@@ -59,7 +59,14 @@ namespace Pay.WeChatPay
 
         public override string GetRequestBody(IRequest request)
         {
-            throw new NotImplementedException();
+            var dic = request.GetParameters();
+            dic.Add("appid", Options.AppId);
+            dic.Add("mch_id", Options.MchId);
+            dic.Add("nonce_str", Guid.NewGuid().ToString("N"));
+            dic.Add("sign_type", "MD5");
+            dic.Add("sign", GetSign(request));
+
+            return dic.ToXmlString();
         }
 
         public override string GetSign(IRequest request)
@@ -69,7 +76,7 @@ namespace Pay.WeChatPay
             dic.Add("mch_id", Options.MchId);
             dic.Add("nonce_str", Guid.NewGuid().ToString("N"));
             dic.Add("sign_type", "MD5");
-            var str = dic.DictionaryToSortQueryParameters() + "&key=" + Options.Key;
+            var str = dic.ToSortQueryParameters() + "&key=" + Options.Key;
 
             return Tools.GetMD5(str);
         }
