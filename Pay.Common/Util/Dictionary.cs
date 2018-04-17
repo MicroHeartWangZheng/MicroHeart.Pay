@@ -1,73 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace Pay.Common.Util
 {
-    /// <summary>
-    /// 符合Alipay习惯的纯字符串字典结构。
-    /// </summary>
-    public class Dictionary : Dictionary<string, string>
+    public static class Dictionary
     {
-        private const string DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-        public Dictionary() { }
-
-        public Dictionary(IDictionary<string, string> dictionary)
-            : base(dictionary)
-        { }
-
         /// <summary>
-        /// 添加一个新的键值对。空键或者空值的键值对将会被忽略。
+        /// 将指定的字典转换成按属性名称排序过的查询参数
         /// </summary>
-        /// <param name="key">键名称</param>
-        /// <param name="value">键对应的值，目前支持：string, int, long, double, bool, DateTime类型</param>
-        public void Add(string key, object value)
+        /// <param name="dict"></param>
+        /// <param name="urlencode"></param>
+        /// <param name="exclude">排除的参数</param>
+        /// <returns></returns>
+        public static string DictionaryToSortQueryParameters(this IDictionary<string, object> dict, bool urlencode = false, params string[] exclude)
         {
-            string strValue;
-
-            if (value == null)
+            var sortDict = dict.OrderBy(m => m.Key).Select(m =>
             {
-                strValue = null;
-            }
-            else if (value is string)
-            {
-                strValue = (string)value;
-            }
-            else if (value is Nullable<DateTime>)
-            {
-                Nullable<DateTime> dateTime = value as Nullable<DateTime>;
-                strValue = dateTime.Value.ToString(DATE_TIME_FORMAT);
-            }
-            else if (value is Nullable<int>)
-            {
-                strValue = (value as Nullable<int>).Value.ToString();
-            }
-            else if (value is Nullable<long>)
-            {
-                strValue = (value as Nullable<long>).Value.ToString();
-            }
-            else if (value is Nullable<double>)
-            {
-                strValue = (value as Nullable<double>).Value.ToString();
-            }
-            else if (value is Nullable<bool>)
-            {
-                strValue = (value as Nullable<bool>).Value.ToString().ToLower();
-            }
-            else
-            {
-                strValue = value.ToString();
-            }
-
-            this.Add(key, strValue);
-        }
-
-        public new void Add(string key, string value)
-        {
-            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
-            {
-                base.Add(key, value);
-            }
+                if (m.Value == null || exclude.Contains(m.Key))
+                    return null;
+                var val = m.Value.ToString();
+                var encodeVal = "";
+                if (urlencode)
+                {
+                    encodeVal += HttpUtility.UrlEncode(val.ToString());
+                }
+                else
+                {
+                    encodeVal = val;
+                }
+                return $"{m.Key}={encodeVal}";
+            }).Where(m => m != null);
+            var result = string.Join("&", sortDict.ToArray());
+            return result;
         }
     }
 }

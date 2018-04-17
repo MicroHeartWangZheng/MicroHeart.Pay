@@ -17,7 +17,7 @@ namespace Pay.Infrastructure
         protected static HttpClient httpClient;
         public InterfaceConfiguration InterfaceConfiguration { set; get; }
 
-        protected readonly long Timestamp = Utils.GetTimestamp();
+        protected readonly long Timestamp = Common.Util.Tools.GetTimestamp();
 
         protected BaseApiClient()
         {

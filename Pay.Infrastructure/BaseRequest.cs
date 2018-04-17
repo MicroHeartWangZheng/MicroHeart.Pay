@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Pay.Infrastructure
 {
@@ -22,7 +21,9 @@ namespace Pay.Infrastructure
             if (Parameters != null)
                 return Parameters;
             var properties = this.GetType().GetProperties().Where(m => m != null);
-            Parameters = properties.ToDictionary(m => m.Name, n => n.GetValue(this, null));
+
+            Parameters = properties.ToDictionary(m => ((JsonPropertyAttribute)m.GetCustomAttributes(typeof(JsonPropertyAttribute),false).First()).PropertyName, n => n.GetValue(this, null));
+
             return Parameters;
         }
         /// <summary>

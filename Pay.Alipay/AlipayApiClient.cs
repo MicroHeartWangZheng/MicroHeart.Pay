@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Pay.Common.Util;
 using Pay.Infrastructure;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Web;
+
 namespace Pay.Alipay
 {
     public class AlipayClient : BaseApiClient
@@ -40,7 +38,7 @@ namespace Pay.Alipay
             dic.Add("charset", this.InterfaceConfiguration.Charset);
             dic.Add("sign_type", "RSA2");
             dic.Add("sign", GetSign(request));
-            dic.Add("timestamp", Utils.GetTimestamp().ToString());
+            dic.Add("timestamp", Common.Util.Tools.GetTimestamp().ToString());
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().DictionaryToSortQueryParameters());
 
@@ -54,7 +52,7 @@ namespace Pay.Alipay
             dic.Add("method", request.GetApiName());
             dic.Add("charset", this.InterfaceConfiguration.Charset);
             dic.Add("sign_type", "RSA2");
-            dic.Add("timestamp", Utils.GetTimestamp().ToString());
+            dic.Add("timestamp", Common.Util.Tools.GetTimestamp().ToString());
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().DictionaryToSortQueryParameters());
 

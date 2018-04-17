@@ -1,15 +1,11 @@
-﻿using Pay.WeChatPay.Request;
-using Pay.WeChatPay.Utility;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Crypto;
+using Pay.Common.Util;
+using Pay.Infrastructure;
+using Pay.WeChatPay.Utility;
 using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using Pay.Infrastructure;
-using Pay.Common.Util;
-using System.Collections.Generic;
 
 namespace Pay.WeChatPay
 {
@@ -69,9 +65,13 @@ namespace Pay.WeChatPay
         public override string GetSign(IRequest request)
         {
             var dic = request.GetParameters();
-            dic.Add("app")
-            var str = request.GetParameters().DictionaryToSortQueryParameters()+"&key="+Options.Key;
+            dic.Add("appid", Options.AppId);
+            dic.Add("mch_id", Options.MchId);
+            dic.Add("nonce_str", Guid.NewGuid().ToString("N"));
+            dic.Add("sign_type", "MD5");
+            var str = dic.DictionaryToSortQueryParameters() + "&key=" + Options.Key;
 
+            return Tools.GetMD5(str);
         }
     }
 }
