@@ -28,7 +28,7 @@ namespace Pay.Alipay
 
         public override string GetRequestBody(IRequest request)
         {
-            if (request.GetMethod() == HttpMethod.Get)
+            if (request.GetHttpMethod() == HttpMethod.Get)
             {
                 return string.Empty;
             }

@@ -22,7 +22,7 @@ namespace Pay.Infrastructure
         /// 获取请求提交的方法
         /// </summary>
         /// <returns></returns>
-        System.Net.Http.HttpMethod GetMethod();
+        System.Net.Http.HttpMethod GetHttpMethod();
     }
 
     public interface IRequest<out TResponse> : IRequest where TResponse : BaseResponse, new()

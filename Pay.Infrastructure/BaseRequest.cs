@@ -34,6 +34,6 @@ namespace Pay.Infrastructure
         /// 获取请求提交的方法
         /// </summary>
         /// <returns></returns>
-        public abstract System.Net.Http.HttpMethod GetMethod();
+        public abstract System.Net.Http.HttpMethod GetHttpMethod();
     }
 }

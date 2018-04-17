@@ -5,7 +5,7 @@ using Pay.WeChatPay.Response;
 
 namespace Pay.WeChatPay.Request
 {
-    public class WeChatPayMicroPayRequest : BaseWeChatPayRequest<WeChatPayMicroPayResponse>
+    public class WeChatPayMicroPayRequest : WeChatPayRequest<WeChatPayMicroPayResponse>
     {
         #region 属性
         /// <summary>
@@ -82,23 +82,19 @@ namespace Pay.WeChatPay.Request
         /// 场景信息
         /// </summary>
         public SceneInfo SceneInfo { get; set; }
+
         #endregion
 
-        //public override bool NeedCertificate => false;
+        public override bool NeedCertificate => false;
 
         public override string GetApiName()
         {
             return "https://api.mch.weixin.qq.com/pay/micropay";
         }
 
-        //public override HttpMethod GetHttpMethod()
-        //{
-        //    return HttpMethod.Post;
-        //}
-
-        public override HttpMethod GetMethod()
+        public override HttpMethod GetHttpMethod()
         {
-            throw new System.NotImplementedException();
+            return HttpMethod.Post;
         }
 
         public override void Validate()

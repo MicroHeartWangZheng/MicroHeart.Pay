@@ -31,7 +31,7 @@ namespace Pay.Infrastructure
             try
             {
                 var requestUri = GetRequestUri(request);
-                var requestMessage = new HttpRequestMessage(request.GetMethod(), requestUri)
+                var requestMessage = new HttpRequestMessage(request.GetHttpMethod(), requestUri)
                 {
                     Content = GetRequestContent(request)
                 };
@@ -71,7 +71,7 @@ namespace Pay.Infrastructure
             try
             {
                 var requestUri = GetRequestUri(request); //根据实例对象 获取api路径 
-                var requestMessage = new HttpRequestMessage(request.GetMethod(), requestUri)
+                var requestMessage = new HttpRequestMessage(request.GetHttpMethod(), requestUri)
                 {
                     Content = GetRequestContent(request) //生成请求对象
                 };
@@ -191,7 +191,7 @@ namespace Pay.Infrastructure
                 var body = GetRequestBody(request);
                 if (string.IsNullOrWhiteSpace(body))
                     return null;
-                result = (string.IsNullOrWhiteSpace(MediaType) || request.GetMethod() == HttpMethod.Get)
+                result = (string.IsNullOrWhiteSpace(MediaType) || request.GetHttpMethod() == HttpMethod.Get)
                     ? new StringContent(body)
                     : new StringContent(body, Encoding.UTF8, MediaType);
             }
