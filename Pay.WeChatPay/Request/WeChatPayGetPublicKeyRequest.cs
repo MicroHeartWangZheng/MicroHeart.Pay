@@ -4,7 +4,7 @@ using System.Net.Http;
 
 namespace Pay.WeChatPay.Request
 {
-    public class WeChatPayGetPublicKeyRequest : IWeChatPayRequest<WeChatPayGetPublicKeyResponse>
+    public class WeChatPayGetPublicKeyRequest : WeChatPayRequest<WeChatPayGetPublicKeyResponse>
     {
         public override bool NeedCertificate => true;
 

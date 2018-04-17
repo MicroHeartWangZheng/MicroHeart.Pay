@@ -4,7 +4,7 @@ using System.Net.Http;
 
 namespace Pay.WeChatPay
 {
-    public abstract class IWeChatPayRequest<T> where T : WeChatPayResponse
+    public abstract class WeChatPayRequest<T> where T : WeChatPayResponse
     {
         private IDictionary<string, object> _parameters = null;
 

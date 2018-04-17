@@ -4,7 +4,7 @@ using System.Net.Http;
 
 namespace Pay.WeChatPay.Request
 {
-    public class WeChatPayTransfersRequest : IWeChatPayRequest<WeChatPayTransfersResponse>
+    public class WeChatPayTransfersRequest : WeChatPayRequest<WeChatPayTransfersResponse>
     {
         #region 属性
         /// <summary>

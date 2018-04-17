@@ -8,7 +8,7 @@ namespace Pay.WeChatPay.Request
     /// <summary>
     /// 申请退款
     /// </summary>
-    public class WeChatPayRefundRequest : IWeChatPayRequest<WeChatPayRefundResponse>
+    public class WeChatPayRefundRequest : WeChatPayRequest<WeChatPayRefundResponse>
     {
         #region 属性
         /// <summary>

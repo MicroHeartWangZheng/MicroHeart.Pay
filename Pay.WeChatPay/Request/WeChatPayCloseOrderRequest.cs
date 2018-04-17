@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace Pay.WeChatPay.Request
 {
-    public class WeChatPayCloseOrderRequest : IWeChatPayRequest<WeChatPayCloseOrderResponse>
+    public class WeChatPayCloseOrderRequest : WeChatPayRequest<WeChatPayCloseOrderResponse>
     {
         #region 属性
         /// <summary>

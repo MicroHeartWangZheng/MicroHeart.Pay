@@ -5,7 +5,7 @@ using Pay.WeChatPay.Response;
 
 namespace Pay.WeChatPay.Request
 {
-    public class WeChatPayMicroPayRequest : IWeChatPayRequest<WeChatPayMicroPayResponse>
+    public class WeChatPayMicroPayRequest : WeChatPayRequest<WeChatPayMicroPayResponse>
     {
         #region 属性
         /// <summary>

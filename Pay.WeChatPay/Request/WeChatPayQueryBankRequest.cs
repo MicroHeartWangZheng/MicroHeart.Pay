@@ -4,7 +4,7 @@ using System.Net.Http;
 
 namespace Pay.WeChatPay.Request
 {
-    public class WeChatPayQueryBankRequest : IWeChatPayRequest<WeChatPayQueryBankResponse>
+    public class WeChatPayQueryBankRequest : WeChatPayRequest<WeChatPayQueryBankResponse>
     {
         /// <summary>
         /// 商户企业付款单号
