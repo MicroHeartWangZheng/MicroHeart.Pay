@@ -17,8 +17,6 @@ namespace Pay.WeChatPay
 
         private AsymmetricKeyParameter PublicKey;
 
-
-
         public override string Name => "wx";
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
@@ -82,5 +80,7 @@ namespace Pay.WeChatPay
 
             return Tools.GetMD5(str);
         }
+
+        public override string MediaType => "application/xml";
     }
 }

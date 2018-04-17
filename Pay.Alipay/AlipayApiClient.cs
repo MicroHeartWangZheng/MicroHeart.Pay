@@ -58,5 +58,7 @@ namespace Pay.Alipay
 
             return Signature.RSASign(dic,"xxx", this.InterfaceConfiguration.Charset, "RSA2");
         }
+
+        public override string MediaType => "application/json";
     }
 }
