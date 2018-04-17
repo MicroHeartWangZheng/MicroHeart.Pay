@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pay.Common\Pay.Common.csproj" />
     <ProjectReference Include="..\Pay.Infrastructure\Pay.Infrastructure.csproj" />
   </ItemGroup>
 
