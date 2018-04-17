@@ -1,8 +1,4 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
-using Pay.WeChatPay.Notify;
-using Pay.WeChatPay.Parser;
-using Pay.WeChatPay.Utility;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;

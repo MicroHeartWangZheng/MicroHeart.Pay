@@ -1,4 +1,6 @@
-﻿namespace Pay.WeChatPay
+﻿using Org.BouncyCastle.Crypto;
+
+namespace Pay.WeChatPay
 {
     public class WeChatPayOptions
     {
@@ -26,5 +28,6 @@
         /// RSA公钥 企业付款到银行卡
         /// </summary>
         public string RsaPublicKey { get; set; }
+
     }
 }

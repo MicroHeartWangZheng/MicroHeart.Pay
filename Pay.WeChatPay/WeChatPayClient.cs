@@ -1,6 +1,4 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
-using Pay.WeChatPay.Parser;
-using Pay.WeChatPay.Request;
+﻿using Pay.WeChatPay.Request;
 using Pay.WeChatPay.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -10,21 +8,25 @@ using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Pay.Infrastructure;
+using Pay.Common.Util;
+using System.Collections.Generic;
 
 namespace Pay.WeChatPay
 {
     public class WeChatPayClient : BaseApiClient
     {
-        private AsymmetricKeyParameter PublicKey;
+        private WeChatPayOptions Options { get; set; }
 
-        public WeChatPayOptions Options { get; set; }
+        protected internal HttpClientEx CertificateClient { get; set; }
+
+        private AsymmetricKeyParameter PublicKey;
 
         public override string Name => "wx";
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
         {
             Options = optionsAccessor?.Value ?? new WeChatPayOptions();
-           
+
             if (string.IsNullOrEmpty(Options.AppId))
             {
                 throw new ArgumentNullException(nameof(Options.AppId));
@@ -50,7 +52,7 @@ namespace Pay.WeChatPay
 
             if (!string.IsNullOrEmpty(Options.RsaPublicKey))
             {
-                PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
+                //PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
             }
         }
 
@@ -66,7 +68,10 @@ namespace Pay.WeChatPay
 
         public override string GetSign(IRequest request)
         {
-            throw new NotImplementedException();
+            var dic = request.GetParameters();
+            dic.Add("app")
+            var str = request.GetParameters().DictionaryToSortQueryParameters()+"&key="+Options.Key;
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Pay.WeChatPay.Response;
+﻿using Newtonsoft.Json;
+using Pay.WeChatPay.Response;
 using System.Collections.Generic;
 using System.Net.Http;
 
@@ -10,16 +11,19 @@ namespace Pay.WeChatPay.Request
         /// <summary>
         /// 对账单日期
         /// </summary>
+        [JsonProperty("bill_date")]
         public string BillDate { get; set; }
 
         /// <summary>
         /// 账单类型
         /// </summary>
+        [JsonProperty("bill_type")]
         public string BillType { get; set; }
 
         /// <summary>
         /// 压缩账单
         /// </summary>
+        [JsonProperty("tar_type")]
         public string TarType { get; set; }
 
         #endregion

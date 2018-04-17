@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Pay.WeChatPay.Response;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,26 +11,31 @@ namespace Pay.WeChatPay.Request
         /// <summary>
         /// 微信订单号
         /// </summary>
+        [JsonProperty("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// 商户订单号
         /// </summary>
+        [JsonProperty("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 商户退款单号
         /// </summary>
+        [JsonProperty("out_refund_no")]
         public string OutRefundNo { get; set; }
 
         /// <summary>
         /// 微信退款单号
         /// </summary>
+        [JsonProperty("refund_id")]
         public string RefundId { get; set; }
 
         /// <summary>
         /// 偏移量
         /// </summary>
+        [JsonProperty("offset")]
         public string Offset { get; set; } 
         #endregion
 

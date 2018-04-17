@@ -1,5 +1,5 @@
+using Newtonsoft.Json;
 using Pay.WeChatPay.Response;
-using System.Collections.Generic;
 using System.Net.Http;
 
 namespace Pay.WeChatPay.Request
@@ -9,11 +9,13 @@ namespace Pay.WeChatPay.Request
         /// <summary>
         /// 微信订单号
         /// </summary>
+        [JsonProperty("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// 商户订单号
         /// </summary>
+        [JsonProperty("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         public override bool NeedCertificate => false;
