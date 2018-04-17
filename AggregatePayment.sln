@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pay.Infrastructure", "Pay.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pay.Common", "Pay.Common\Pay.Common.csproj", "{8E4E52CF-6890-4537-92B1-5C65FCD05685}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pay.WeChatPay", "Pay.WeChatPay\Pay.WeChatPay.csproj", "{E1CDE154-7630-49DC-BED9-B11C5B4B3192}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8E4E52CF-6890-4537-92B1-5C65FCD05685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E4E52CF-6890-4537-92B1-5C65FCD05685}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E4E52CF-6890-4537-92B1-5C65FCD05685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1CDE154-7630-49DC-BED9-B11C5B4B3192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CDE154-7630-49DC-BED9-B11C5B4B3192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CDE154-7630-49DC-BED9-B11C5B4B3192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CDE154-7630-49DC-BED9-B11C5B4B3192}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
