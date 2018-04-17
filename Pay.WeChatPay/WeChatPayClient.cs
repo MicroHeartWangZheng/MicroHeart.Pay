@@ -17,6 +17,8 @@ namespace Pay.WeChatPay
 
         private AsymmetricKeyParameter PublicKey;
 
+
+
         public override string Name => "wx";
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
@@ -62,7 +64,7 @@ namespace Pay.WeChatPay
             var dic = request.GetParameters();
             dic.Add("appid", Options.AppId);
             dic.Add("mch_id", Options.MchId);
-            dic.Add("nonce_str", Guid.NewGuid().ToString("N"));
+            dic.Add("nonce_str", RandomString);
             dic.Add("sign_type", "MD5");
             dic.Add("sign", GetSign(request));
 
@@ -74,7 +76,7 @@ namespace Pay.WeChatPay
             var dic = request.GetParameters();
             dic.Add("appid", Options.AppId);
             dic.Add("mch_id", Options.MchId);
-            dic.Add("nonce_str", Guid.NewGuid().ToString("N"));
+            dic.Add("nonce_str", RandomString);
             dic.Add("sign_type", "MD5");
             var str = dic.ToSortQueryParameters() + "&key=" + Options.Key;
 

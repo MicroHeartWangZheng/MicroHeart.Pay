@@ -14,12 +14,20 @@ namespace Pay.Common.Util
         /// 获取TimeStamp
         /// </summary>
         /// <returns></returns>
-        public static long GetTimestamp()
+        public static string GetRandomString(int i=1)
         {
-            var startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
+            if(i==1)
+            {
+                var startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
 
-            return (long)(DateTime.UtcNow - startTime).TotalMilliseconds;
+                return (DateTime.UtcNow - startTime).TotalMilliseconds.ToString();
+            }
+            else
+            {
+                return Guid.NewGuid().ToString("N");
+            }
         }
+
 
         public static string GetMD5(string data)
         {

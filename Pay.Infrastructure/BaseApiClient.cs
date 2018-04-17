@@ -17,7 +17,8 @@ namespace Pay.Infrastructure
         protected static HttpClient httpClient;
         public InterfaceConfiguration InterfaceConfiguration { set; get; }
 
-        protected readonly long Timestamp = Common.Util.Tools.GetTimestamp();
+        protected readonly string RandomString = Tools.GetRandomString();
+
 
         protected BaseApiClient()
         {
@@ -214,6 +215,6 @@ namespace Pay.Infrastructure
         /// 获取数据提交的MediaType
         /// </summary>
         public virtual string MediaType => "";
-      
+
     }
 }

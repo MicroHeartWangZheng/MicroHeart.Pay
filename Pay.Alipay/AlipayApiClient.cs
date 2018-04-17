@@ -32,13 +32,13 @@ namespace Pay.Alipay
             {
                 return string.Empty;
             }
-            var dic = new Dictionary<string, string>();
+            var dic = new Dictionary<string, object>();
             dic.Add("app_id", this.InterfaceConfiguration.AppId);
             dic.Add("method", request.GetApiName());
             dic.Add("charset", this.InterfaceConfiguration.Charset);
             dic.Add("sign_type", "RSA2");
             dic.Add("sign", GetSign(request));
-            dic.Add("timestamp", Common.Util.Tools.GetTimestamp().ToString());
+            dic.Add("timestamp", RandomString);
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
 
@@ -52,7 +52,7 @@ namespace Pay.Alipay
             dic.Add("method", request.GetApiName());
             dic.Add("charset", this.InterfaceConfiguration.Charset);
             dic.Add("sign_type", "RSA2");
-            dic.Add("timestamp", Common.Util.Tools.GetTimestamp().ToString());
+            dic.Add("timestamp", RandomString);
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
 
