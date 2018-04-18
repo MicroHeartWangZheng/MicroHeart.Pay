@@ -23,7 +23,7 @@ namespace Pay.Alipay
 
         public override string GetRequestUri(IRequest request)
         {
-            return this.InterfaceConfiguration.ApiUrl;
+            return this.InterfaceConfiguration.ApiUrl + "/" + request.GetApiName();
         }
 
         public override string GetRequestBody(IRequest request)
@@ -56,7 +56,7 @@ namespace Pay.Alipay
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
 
-            return Signature.RSASign(dic,"xxx", this.InterfaceConfiguration.Charset, "RSA2");
+            return Signature.RSASign(dic, "xxx", this.InterfaceConfiguration.Charset, "RSA2");
         }
 
         public override string MediaType => "application/json";

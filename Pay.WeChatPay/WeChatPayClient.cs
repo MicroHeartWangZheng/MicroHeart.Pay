@@ -50,7 +50,7 @@ namespace Pay.WeChatPay
 
         public override string GetRequestUri(IRequest request)
         {
-            return string.Empty;
+            return request.GetApiName();
         }
 
         public override string GetRequestBody(IRequest request)
