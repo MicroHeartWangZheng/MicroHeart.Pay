@@ -17,7 +17,7 @@ namespace Pay.Infrastructure
         protected static HttpClient httpClient;
         public InterfaceConfiguration InterfaceConfiguration { set; get; }
 
-        protected readonly string RandomString = Tools.GetRandomString();
+        protected readonly string RandomString = Tools.GetRandomString(2);
 
 
         protected BaseApiClient()
@@ -31,6 +31,7 @@ namespace Pay.Infrastructure
             try
             {
                 var requestUri = GetRequestUri(request);
+
                 var requestMessage = new HttpRequestMessage(request.GetHttpMethod(), requestUri)
                 {
                     Content = GetRequestContent(request)
@@ -189,8 +190,10 @@ namespace Pay.Infrastructure
             else
             {
                 var body = GetRequestBody(request);
+
                 if (string.IsNullOrWhiteSpace(body))
                     return null;
+
                 result = (string.IsNullOrWhiteSpace(MediaType) || request.GetHttpMethod() == HttpMethod.Get)
                     ? new StringContent(body)
                     : new StringContent(body, Encoding.UTF8, MediaType);

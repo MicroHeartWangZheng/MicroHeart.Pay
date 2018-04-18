@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Pay.Common.Util
 {
-    public static class Dictionary
+    public static class DictionaryExtend
     {
         /// <summary>
         /// 将指定的字典转换成按属性名称排序过的查询参数
@@ -41,9 +42,9 @@ namespace Pay.Common.Util
         /// </summary>
         /// <param name="dic"></param>
         /// <returns></returns>
-        public static string ToXmlString(this IDictionary<string,object> dic)
+        public static string ToXmlString(this IDictionary<string, object> dic)
         {
-            if(dic.Count==0)
+            if (dic.Count == 0)
             {
                 throw new Exception();
             }
@@ -66,11 +67,52 @@ namespace Pay.Common.Util
                 }
                 else//除了string和int类型不能含有其他数据类型
                 {
-                    throw new Exception("WxPayData字段数据类型错误!");
+                    xml += "<" + pair.Key + ">" + "<![CDATA[" + JsonConvert.SerializeObject(pair.Value) + "]]></" + pair.Key + ">";
                 }
             }
             xml += "</xml>";
             return xml;
+        }
+        /// <summary>
+        /// 清除字典中值为空的项。
+        /// </summary>
+        /// <param name="dict">待清除的字典</param>
+        /// <returns>清除后的字典</returns>
+        public static IDictionary<string, object> CleanupDictionary(this IDictionary<string, object> dict)
+        {
+            IDictionary<string, object> newDict = new Dictionary<string, object>(dict.Count);
+            IEnumerator<KeyValuePair<string, object>> dem = dict.GetEnumerator();
+
+            while (dem.MoveNext())
+            {
+                string name = dem.Current.Key;
+
+                object value = dem.Current.Value;
+
+                if (value != null && (value.GetType() == typeof(int) ||
+                    value.GetType() == typeof(decimal) ||
+                    value.GetType() == typeof(string) ||
+                    value.GetType() == typeof(long))  )
+                {
+                    newDict.Add(name, value);
+                }
+                else if (value != null)
+                {
+                    bool isAllNull = true;
+                    foreach (var item in value.GetType().GetProperties())
+                    {
+                        if (item.GetValue(value) != null)
+                        {
+                            isAllNull = false;
+                        }
+                    }
+                    if (!isAllNull)
+                    {
+                        newDict.Add(name, JsonConvert.SerializeObject(value));
+                    }
+                }
+            }
+            return newDict;
         }
     }
 }

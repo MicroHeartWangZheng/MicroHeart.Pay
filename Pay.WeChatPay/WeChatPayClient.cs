@@ -2,6 +2,8 @@
 using Pay.Common.Util;
 using Pay.Infrastructure;
 using Pay.WeChatPay.Utility;
+using System;
+using System.Collections.Generic;
 
 namespace Pay.WeChatPay
 {
@@ -56,25 +58,59 @@ namespace Pay.WeChatPay
         public override string GetRequestBody(IRequest request)
         {
             var dic = request.GetParameters();
-            dic.Add("appid", Options.AppId);
-            dic.Add("mch_id", Options.MchId);
-            dic.Add("nonce_str", RandomString);
-            dic.Add("sign_type", "MD5");
-            dic.Add("sign", GetSign(request));
-
-            return dic.ToXmlString();
+            if (!dic.ContainsKey("appid"))
+            {
+                dic.Add("appid", Options.AppId);
+            }
+            if (!dic.ContainsKey("mch_id"))
+            {
+                dic.Add("mch_id", Options.MchId);
+            }
+            if (!dic.ContainsKey("nonce_str"))
+            {
+                dic.Add("nonce_str", RandomString);
+            }
+            if (!dic.ContainsKey("sign_type"))
+            {
+                dic.Add("sign_type", "MD5");
+            }
+            if (!dic.ContainsKey("sign"))
+            {
+                dic.Add("sign", GetSign(request));
+            }
+            return dic.CleanupDictionary().ToXmlString();
         }
 
         public override string GetSign(IRequest request)
         {
-            var dic = request.GetParameters();
-            dic.Add("appid", Options.AppId);
-            dic.Add("mch_id", Options.MchId);
-            dic.Add("nonce_str", RandomString);
-            dic.Add("sign_type", "MD5");
-            var str = dic.ToSortQueryParameters() + "&key=" + Options.Key;
+            try
+            {
+                var dic = request.GetParameters();
+                if (!dic.ContainsKey("appid"))
+                {
+                    dic.Add("appid", Options.AppId);
+                }
+                if (!dic.ContainsKey("mch_id"))
+                {
+                    dic.Add("mch_id", Options.MchId);
+                }
+                if (!dic.ContainsKey("nonce_str"))
+                {
+                    dic.Add("nonce_str", RandomString);
+                }
+                if (!dic.ContainsKey("sign_type"))
+                {
+                    dic.Add("sign_type", "MD5");
+                }
+                
+                var str = dic.CleanupDictionary().ToSortQueryParameters() + "&key=" + Options.Key;
 
-            return Tools.GetMD5(str);
+                return Tools.GetMD5(str);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public override string MediaType => "application/xml";
