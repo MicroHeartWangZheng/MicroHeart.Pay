@@ -14,10 +14,7 @@ namespace Pay.Infrastructure
         /// 获取所有的Key-Value形式的文本请求参数字典。
         /// </summary>
         IDictionary<string, object> GetParameters();
-        /// <summary>
-        /// 客户端参数检查，减少服务端无效调用。
-        /// </summary>
-        void Validate();
+       
         /// <summary>
         /// 获取请求提交的方法
         /// </summary>

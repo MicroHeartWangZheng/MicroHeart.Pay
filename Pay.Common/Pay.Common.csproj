@@ -4,8 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BouncyCastle" Version="1.8.2" />
-  </ItemGroup>
-
 </Project>

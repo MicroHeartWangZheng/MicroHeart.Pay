@@ -97,10 +97,6 @@ namespace Pay.WeChatPay.Request
             return HttpMethod.Post;
         }
 
-        public override void Validate()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
 }

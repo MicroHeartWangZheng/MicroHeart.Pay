@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
-using Org.BouncyCastle.Crypto;
 using Pay.Common.Util;
 using Pay.Infrastructure;
 using Pay.WeChatPay.Utility;
-using System;
-using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Pay.WeChatPay
 {
@@ -15,41 +11,41 @@ namespace Pay.WeChatPay
 
         protected internal HttpClientEx CertificateClient { get; set; }
 
-        private AsymmetricKeyParameter PublicKey;
+        //private AsymmetricKeyParameter PublicKey;
 
         public override string Name => "wx";
 
-        public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor) : base()
         {
             Options = optionsAccessor?.Value ?? new WeChatPayOptions();
 
-            if (string.IsNullOrEmpty(Options.AppId))
-            {
-                throw new ArgumentNullException(nameof(Options.AppId));
-            }
+            //if (string.IsNullOrEmpty(Options.AppId))
+            //{
+            //    throw new ArgumentNullException(nameof(Options.AppId));
+            //}
 
-            if (string.IsNullOrEmpty(Options.MchId))
-            {
-                throw new ArgumentNullException(nameof(Options.MchId));
-            }
+            //if (string.IsNullOrEmpty(Options.MchId))
+            //{
+            //    throw new ArgumentNullException(nameof(Options.MchId));
+            //}
 
-            if (string.IsNullOrEmpty(Options.Key))
-            {
-                throw new ArgumentNullException(nameof(Options.Key));
-            }
+            //if (string.IsNullOrEmpty(Options.Key))
+            //{
+            //    throw new ArgumentNullException(nameof(Options.Key));
+            //}
 
-            if (!string.IsNullOrEmpty(Options.Certificate))
-            {
-                var clientHandler = new HttpClientHandler();
-                var certificate = Convert.FromBase64String(Options.Certificate);
-                clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
-                CertificateClient = new HttpClientEx(clientHandler);
-            }
+            //if (!string.IsNullOrEmpty(Options.Certificate))
+            //{
+            //    var clientHandler = new HttpClientHandler();
+            //    var certificate = Convert.FromBase64String(Options.Certificate);
+            //    clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
+            //    CertificateClient = new HttpClientEx(clientHandler);
+            //}
 
-            if (!string.IsNullOrEmpty(Options.RsaPublicKey))
-            {
-                //PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
-            }
+            //if (!string.IsNullOrEmpty(Options.RsaPublicKey))
+            //{
+            //    //PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
+            //}
         }
 
         public override string GetRequestUri(IRequest request)

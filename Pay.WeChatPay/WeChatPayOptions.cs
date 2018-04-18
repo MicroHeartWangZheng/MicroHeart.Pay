@@ -1,6 +1,4 @@
-﻿using Org.BouncyCastle.Crypto;
-
-namespace Pay.WeChatPay
+﻿namespace Pay.WeChatPay
 {
     public class WeChatPayOptions
     {

@@ -11,16 +11,19 @@ namespace Pay.Test
     [TestClass]
     public class UnitTest1
     {
-
-
         [TestMethod]
         public async Task TestMethod1()
         {
             WeChatPayClient weChatPayClient = new WeChatPayClient(new myWeChatPayOptions());
-            await weChatPayClient.ExecuteAsync<WeChatPayMicroPayResponse>(new WeChatPayMicroPayRequest()
+            var a = await weChatPayClient.ExecuteAsync(new WeChatPayMicroPayRequest()
             {
-                //这种就可以了
+                Body = "商品描述",
+                OutTradeNo = "1234567",
+                TotalFee = 100,
+                SpbillCreateIp = "127.0.0.1",
+                AuthCode = "授权码"
             });
+            var b = a;
 
         }
     }

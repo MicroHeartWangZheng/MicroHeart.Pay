@@ -26,10 +26,7 @@ namespace Pay.Infrastructure
 
             return Parameters;
         }
-        /// <summary>
-        /// 客户端参数检查，减少服务端无效调用
-        /// </summary>
-        public abstract void Validate();
+       
         /// <summary>
         /// 获取请求提交的方法
         /// </summary>
