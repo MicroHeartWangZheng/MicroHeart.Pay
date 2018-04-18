@@ -16,7 +16,7 @@ namespace Pay.WeChatPay.Models
         /// <summary>
         /// 门店名称
         /// </summary>
-        [JsonProperty("name	")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
