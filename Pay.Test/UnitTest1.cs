@@ -14,16 +14,25 @@ namespace Pay.Test
         [TestMethod]
         public async Task TestMethod1()
         {
+            var guid = Guid.NewGuid().ToString("N");
             WeChatPayClient weChatPayClient = new WeChatPayClient(new myWeChatPayOptions());
             var a = await weChatPayClient.ExecuteAsync(new WeChatPayMicroPayRequest()
             {
                 Body = "商品描述",
-                OutTradeNo = Guid.NewGuid().ToString("N"),
+                OutTradeNo = guid,
                 TotalFee = 1,
                 SpbillCreateIp = "127.0.0.1",
-                AuthCode = "135063193470436536"
+                AuthCode = "134914855872912166"
             });
+
+
+
+
         }
+
+
+        public void QueryTest()
+
     }
 
     public class myWeChatPayOptions : IOptions<WeChatPayOptions>
@@ -34,11 +43,7 @@ namespace Pay.Test
             {
                 return new WeChatPayOptions()
                 {
-                    AppId = "wx5c078b6e0964e202",
-                    Certificate = "2222",
-                    Key = "A8D81FB5957DFB506D59E6535F493847",
-                    MchId = "1487015352",
-                    RsaPublicKey = "5555"
+                   
                 };
             }
         }
