@@ -14,12 +14,18 @@ namespace Pay.Infrastructure
         /// 获取所有的Key-Value形式的文本请求参数字典。
         /// </summary>
         IDictionary<string, object> GetParameters();
-       
+
         /// <summary>
         /// 获取请求提交的方法
         /// </summary>
         /// <returns></returns>
         System.Net.Http.HttpMethod GetHttpMethod();
+
+
+        /// <summary>
+        /// 是否需要证书
+        /// </summary>
+        bool NeedCertificate { get; }
     }
 
     public interface IRequest<out TResponse> : IRequest where TResponse : BaseResponse, new()

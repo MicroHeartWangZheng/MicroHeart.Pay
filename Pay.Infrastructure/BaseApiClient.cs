@@ -25,7 +25,7 @@ namespace Pay.Infrastructure
             httpClient = httpClient ?? new HttpClient();
         }
 
-        public async Task<TResponse> ExecuteAsync<TResponse>(IRequest<TResponse> request) where TResponse : BaseResponse, new()
+        public virtual async Task<TResponse> ExecuteAsync<TResponse>(IRequest<TResponse> request) where TResponse : BaseResponse, new()
         {
             TResponse result;
             try
@@ -36,7 +36,7 @@ namespace Pay.Infrastructure
                 {
                     Content = GetRequestContent(request)
                 };
-
+               
                 var responseMessage = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
                 var responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                 result = JsonConvert.DeserializeObject<TResponse>(responseContent);
@@ -66,7 +66,7 @@ namespace Pay.Infrastructure
         /// <typeparam name="TResponse">请求类型对应的 响应类型</typeparam>
         /// <param name="request"></param>
         /// <returns></returns>
-        public TResponse Execute<TResponse>(IRequest<TResponse> request) where TResponse : BaseResponse, new()
+        public virtual TResponse Execute<TResponse>(IRequest<TResponse> request) where TResponse : BaseResponse, new()
         {
             TResponse result = null;
             try

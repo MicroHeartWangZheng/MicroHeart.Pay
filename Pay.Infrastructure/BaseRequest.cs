@@ -34,5 +34,10 @@ namespace Pay.Infrastructure
         /// </summary>
         /// <returns></returns>
         public abstract System.Net.Http.HttpMethod GetHttpMethod();
+
+        /// <summary>
+        /// 是否需要证书
+        /// </summary>
+        public abstract bool NeedCertificate { get; }
     }
 }

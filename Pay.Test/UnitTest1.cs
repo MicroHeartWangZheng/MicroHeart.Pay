@@ -23,8 +23,6 @@ namespace Pay.Test
                 SpbillCreateIp = "127.0.0.1",
                 AuthCode = "授权码"
             });
-            var b = a;
-
         }
     }
 
