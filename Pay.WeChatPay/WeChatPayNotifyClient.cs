@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Pay.Common.Util;
+using Pay.WeChatPay.Models;
 using System;
 using System.IO;
 using System.Text;
@@ -15,38 +17,33 @@ namespace Pay.WeChatPay
         public virtual ILogger<WeChatPayNotifyClient> Logger { get; set; }
 
         public WeChatPayNotifyClient(
-            IOptions<WeChatPayOptions> optionsAccessor,
-            ILogger<WeChatPayNotifyClient> logger)
+            IOptions<WeChatPayOptions> optionsAccessor
+            )
         {
-            Options = optionsAccessor?.Value ?? new WeChatPayOptions();
-            Logger = logger;
-
-            if (string.IsNullOrEmpty(Options.Key))
-            {
-                throw new ArgumentNullException(nameof(Options.Key));
-            }
+            Options = optionsAccessor?.Value;
         }
 
-        //public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotifyResponse
-        //{
-        //    var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-        //    Logger.LogInformation(0, "Request:{body}", body);
+        public async Task<WeChatPayNotifyResponse> AcceptNotice(HttpRequest request)
+        {
+            //验签
+            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
 
-        //    var parser = new WeChatPayXmlParser<T>();
-        //    var rsp = parser.Parse(body);
-        //    if (rsp is WeChatPayRefundNotifyResponse)
-        //    {
-        //        var key = MD5.Compute(Options.Key).ToLower();
-        //        var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
-        //        Logger.LogInformation(1, "Decrypt Content:{data}", data); // AES-256-ECB
-        //        rsp = parser.Parse(body, data);
-        //    }
-        //    else
-        //    {
-        //        CheckNotifySign(rsp);
-        //    }
-        //    return rsp;
-        //}
+            var response = Tools.DeserializeToObject<WeChatPayRefundNotifyResponse>(body);
+
+            var key = Tools.GetMD5(Options.Key).ToLower();
+
+            var data = AES.Decrypt(response.ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
+
+            var information = Tools.DeserializeToObject<EncryptedInformation>(data);
+
+
+            //业务处理
+
+            return new WeChatPayNotifyResponse()
+            {
+                ReturnCode = "SUCCESS"
+            };
+        }
 
         //private void CheckNotifySign(WeChatPayNotifyResponse response)
         //{

@@ -29,13 +29,13 @@ namespace Pay.WeChatPay
 
             httpClient = httpClient ?? new HttpClient();
 
-            if (httpCertificateClient == null)
-            {
-                var clientHandler = new HttpClientHandler();
-                var certificate = Convert.FromBase64String(Options.Certificate);
-                clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
-                httpCertificateClient = new HttpClient(clientHandler);
-            }
+            //if (httpCertificateClient == null)
+            //{
+            //    var clientHandler = new HttpClientHandler();
+            //    var certificate = Convert.FromBase64String(Options.Certificate);
+            //    clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
+            //    httpCertificateClient = new HttpClient(clientHandler);
+            //}
         }
 
         public override string GetRequestUri(IRequest request)

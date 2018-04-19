@@ -18,10 +18,10 @@ namespace Pay.Test
             var a = await weChatPayClient.ExecuteAsync(new WeChatPayMicroPayRequest()
             {
                 Body = "商品描述",
-                OutTradeNo = "1234567",
-                TotalFee = 100,
+                OutTradeNo = Guid.NewGuid().ToString("N"),
+                TotalFee = 1,
                 SpbillCreateIp = "127.0.0.1",
-                AuthCode = "授权码"
+                AuthCode = "135063193470436536"
             });
         }
     }
@@ -34,10 +34,10 @@ namespace Pay.Test
             {
                 return new WeChatPayOptions()
                 {
-                    AppId = "1111",
+                    AppId = "wx5c078b6e0964e202",
                     Certificate = "2222",
-                    Key = "3333",
-                    MchId = "4444",
+                    Key = "A8D81FB5957DFB506D59E6535F493847",
+                    MchId = "1487015352",
                     RsaPublicKey = "5555"
                 };
             }

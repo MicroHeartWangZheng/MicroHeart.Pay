@@ -89,6 +89,10 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\NETStandard.Library\2.0.1\build\netstandard2.0\ref\netstandard.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -112,14 +116,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pay.Alipay\Pay.Alipay.csproj">
+      <Project>{ddbbf123-d3df-47ca-b3c7-9a1be37c3b46}</Project>
+      <Name>Pay.Alipay</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pay.Infrastructure\Pay.Infrastructure.csproj">
-      <Project>{1C944A96-4720-4EC4-B62B-DECE70537BA6}</Project>
+      <Project>{1c944a96-4720-4ec4-b62b-dece70537ba6}</Project>
       <Name>Pay.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Pay.WeChatPay\Pay.WeChatPay.csproj">
       <Project>{e1cde154-7630-49dc-bed9-b11c5b4b3192}</Project>
       <Name>Pay.WeChatPay</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
