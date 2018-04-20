@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pay.WeChatPay", "Pay.WeChat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pay.Test", "Pay.Test\Pay.Test.csproj", "{C1BEA4DB-5DFC-4BD4-B383-3A1A69B635B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dome", "Dome\Dome.csproj", "{02AE67BE-7C6B-4178-90CD-1605035B3866}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C1BEA4DB-5DFC-4BD4-B383-3A1A69B635B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1BEA4DB-5DFC-4BD4-B383-3A1A69B635B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1BEA4DB-5DFC-4BD4-B383-3A1A69B635B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02AE67BE-7C6B-4178-90CD-1605035B3866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02AE67BE-7C6B-4178-90CD-1605035B3866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02AE67BE-7C6B-4178-90CD-1605035B3866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02AE67BE-7C6B-4178-90CD-1605035B3866}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

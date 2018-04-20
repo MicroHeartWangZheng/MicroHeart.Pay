@@ -5,6 +5,12 @@ namespace Pay.WeChatPay.Response
     public class WeChatPayRefundQueryResponse : WeChatPayResponse
     {
         /// <summary>
+        /// 订单总退款次数
+        /// </summary>
+        [JsonProperty("total_refund_count")]
+        public int TotalRefundCount { get; set; }
+
+        /// <summary>
         /// 微信订单号
         /// </summary>
         [JsonProperty("transaction_id")]
@@ -44,7 +50,7 @@ namespace Pay.WeChatPay.Response
         /// 退款笔数
         /// </summary>
         [JsonProperty("refund_count")]
-        public string RefundCount { get; set; }
+        public int RefundCount { get; set; }
 
         // 商户退款单号 out_refund_no_$n
 
@@ -70,11 +76,6 @@ namespace Pay.WeChatPay.Response
         [JsonProperty("refund_channel_0")]
         public string RefundChannel0 { get; set; }
 
-        /// <summary>
-        /// 订单总退款次数
-        /// </summary>
-        [JsonProperty("total_refund_count")]
-        public int TotalRefundCount { get; set; }
 
         // 申请退款金额 refund_fee_$n
 
@@ -98,7 +99,7 @@ namespace Pay.WeChatPay.Response
         /// 代金券类型 0 0
         /// </summary>
         [JsonProperty("coupon_type_0_0")]
-        public int CouponType00 { get; set; }
+        public string CouponType00 { get; set; }
 
         // 总代金券退款金额 coupon_refund_fee_$n
 
@@ -122,7 +123,7 @@ namespace Pay.WeChatPay.Response
         /// 退款代金券ID 0 0
         /// </summary>
         [JsonProperty("coupon_refund_id_0_0")]
-        public int CouponRefundId00 { get; set; }
+        public string CouponRefundId00 { get; set; }
 
         // 单个代金券退款金额 coupon_refund_fee_$n_$m
 
@@ -139,7 +140,7 @@ namespace Pay.WeChatPay.Response
         /// 退款状态 0
         /// </summary>
         [JsonProperty("refund_status_0")]
-        public int RefundStatus0 { get; set; }
+        public string RefundStatus0 { get; set; }
 
         // 退款资金来源 refund_account_$n
 
@@ -147,7 +148,7 @@ namespace Pay.WeChatPay.Response
         /// 退款资金来源 0
         /// </summary>
         [JsonProperty("refund_account_0")]
-        public int RefundAccount0 { get; set; }
+        public string RefundAccount0 { get; set; }
 
         // 退款入账账户 refund_recv_accout_$n
 
@@ -155,7 +156,7 @@ namespace Pay.WeChatPay.Response
         /// 退款入账账户 0
         /// </summary>
         [JsonProperty("refund_recv_accout_0")]
-        public int RefundRecvAccout0 { get; set; }
+        public string RefundRecvAccout0 { get; set; }
 
         // 退款成功时间 refund_success_time_$n
 
@@ -163,6 +164,6 @@ namespace Pay.WeChatPay.Response
         /// 退款成功时间 0
         /// </summary>
         [JsonProperty("refund_success_time_0")]
-        public int RefundSuccessTime0 { get; set; }
+        public string RefundSuccessTime0 { get; set; }
     }
 }

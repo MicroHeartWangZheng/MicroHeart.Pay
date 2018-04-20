@@ -32,10 +32,9 @@ namespace Pay.WeChatPay
 
             if (httpCertificateClient == null)
             {
-                //var clientHandler = new HttpClientHandler();
-                //var certificate = Convert.FromBase64String(Options.Certificate);
-                //clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
-                //httpCertificateClient = new HttpClient(clientHandler);
+                var clientHandler = new HttpClientHandler();
+                clientHandler.ClientCertificates.Add(new X509Certificate2(weChatPayOptions.CertificatePath, weChatPayOptions.MchId, X509KeyStorageFlags.MachineKeySet));
+                httpCertificateClient = new HttpClient(clientHandler);
             }
         }
 

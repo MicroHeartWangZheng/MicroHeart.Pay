@@ -18,9 +18,9 @@
         public string Key { get; set; }
 
         /// <summary>
-        /// API证书文件 Base64字符串
+        /// API证书文件路径
         /// </summary>
-        public string Certificate { get; set; }
+        public string CertificatePath { get; set; }
 
         /// <summary>
         /// RSA公钥 企业付款到银行卡
