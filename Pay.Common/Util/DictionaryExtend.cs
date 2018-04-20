@@ -21,6 +21,10 @@ namespace Pay.Common.Util
             {
                 if (m.Value == null || exclude.Contains(m.Key))
                     return null;
+                if (m.Value is string && (string)m.Value == string.Empty)
+                {
+                    return null;
+                }
                 var val = m.Value.ToString();
                 var encodeVal = "";
                 if (urlencode)
@@ -92,7 +96,7 @@ namespace Pay.Common.Util
                 if (value != null && (value.GetType() == typeof(int) ||
                     value.GetType() == typeof(decimal) ||
                     value.GetType() == typeof(string) ||
-                    value.GetType() == typeof(long))  )
+                    value.GetType() == typeof(long)))
                 {
                     newDict.Add(name, value);
                 }
