@@ -23,12 +23,6 @@ namespace Pay.WeChatPay.Response
         public string IsSubscribe { get; set; }
 
         /// <summary>
-        /// 是否关注子公众账号
-        /// </summary>
-        [JsonProperty("sub_is_subscribe")]
-        public string SubIsSubscribe { get; set; }
-
-        /// <summary>
         /// 交易类型	
         /// </summary>
         [JsonProperty("trade_type")]

@@ -5,6 +5,7 @@ using Pay.Infrastructure;
 using Pay.WeChatPay.Utility;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
@@ -17,7 +18,7 @@ namespace Pay.WeChatPay
     {
         protected static HttpClient httpCertificateClient;
 
-        private WeChatPayOptions Options { get; set; }
+        private WeChatPayOptions weChatPayOptions { get; set; }
 
         protected internal HttpClientEx CertificateClient { get; set; }
 
@@ -25,17 +26,17 @@ namespace Pay.WeChatPay
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor?.Value ?? new WeChatPayOptions();
+            weChatPayOptions = optionsAccessor?.Value ?? new WeChatPayOptions();
 
             httpClient = httpClient ?? new HttpClient();
 
-            //if (httpCertificateClient == null)
-            //{
-            //    var clientHandler = new HttpClientHandler();
-            //    var certificate = Convert.FromBase64String(Options.Certificate);
-            //    clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
-            //    httpCertificateClient = new HttpClient(clientHandler);
-            //}
+            if (httpCertificateClient == null)
+            {
+                //var clientHandler = new HttpClientHandler();
+                //var certificate = Convert.FromBase64String(Options.Certificate);
+                //clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
+                //httpCertificateClient = new HttpClient(clientHandler);
+            }
         }
 
         public override string GetRequestUri(IRequest request)
@@ -48,11 +49,11 @@ namespace Pay.WeChatPay
             var dic = request.GetParameters();
             if (!dic.ContainsKey("appid"))
             {
-                dic.Add("appid", Options.AppId);
+                dic.Add("appid", weChatPayOptions.AppId);
             }
             if (!dic.ContainsKey("mch_id"))
             {
-                dic.Add("mch_id", Options.MchId);
+                dic.Add("mch_id", weChatPayOptions.MchId);
             }
             if (!dic.ContainsKey("nonce_str"))
             {
@@ -76,11 +77,11 @@ namespace Pay.WeChatPay
                 var dic = request.GetParameters();
                 if (!dic.ContainsKey("appid"))
                 {
-                    dic.Add("appid", Options.AppId);
+                    dic.Add("appid", weChatPayOptions.AppId);
                 }
                 if (!dic.ContainsKey("mch_id"))
                 {
-                    dic.Add("mch_id", Options.MchId);
+                    dic.Add("mch_id", weChatPayOptions.MchId);
                 }
                 if (!dic.ContainsKey("nonce_str"))
                 {
@@ -91,7 +92,7 @@ namespace Pay.WeChatPay
                     dic.Add("sign_type", "MD5");
                 }
 
-                var str = dic.CleanupDictionary().ToSortQueryParameters() + "&key=" + Options.Key;
+                var str = dic.CleanupDictionary().ToSortQueryParameters() + "&key=" + weChatPayOptions.Key;
 
                 return Tools.GetMD5(str);
             }
@@ -101,11 +102,11 @@ namespace Pay.WeChatPay
             }
         }
 
-        public override string MediaType => "application/xml";
+        public override string MediaType => "text/xml";
 
         public override async Task<TResponse> ExecuteAsync<TResponse>(IRequest<TResponse> request)
         {
-            TResponse result;
+            TResponse response;
             try
             {
                 var requestUri = GetRequestUri(request);
@@ -116,7 +117,7 @@ namespace Pay.WeChatPay
                 };
 
                 HttpResponseMessage responseMessage;
-                string responseContent;
+                string responseXml;
                 if (request.NeedCertificate)
                 {
                     responseMessage = await httpCertificateClient.SendAsync(requestMessage).ConfigureAwait(false);
@@ -125,28 +126,53 @@ namespace Pay.WeChatPay
                 {
                     responseMessage = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
                 }
-                responseContent = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                responseXml = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                result = Tools.DeserializeToObject<TResponse>(responseContent);
+                if (!CheckSign(responseXml))
+                {
+                    response = new TResponse
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        ResponseBody = "验签失败"
+                    };
+                    return response;
+                }
 
-                //result = JsonConvert.DeserializeObject<TResponse>(responseContent);
-                DownloadFile(result as IFileDownloadResponse);
-                result.RequestUri = requestUri;
-                result.RequestBody = GetRequestBody(request);
-                result.StatusCode = responseMessage.StatusCode;
-                result.Headers = responseMessage.Headers;
-                result.ResponseBody = responseContent;
-                return result;
+                response = Tools.XmlToObject<TResponse>(responseXml);
+
+                DownloadFile(response as IFileDownloadResponse);
+                response.RequestUri = requestUri;
+                response.RequestBody = GetRequestBody(request);
+                response.StatusCode = responseMessage.StatusCode;
+                response.Headers = responseMessage.Headers;
+                response.ResponseBody = responseXml;
+                return response;
             }
             catch (Exception ex)
             {
-                result = new TResponse
+                response = new TResponse
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     ResponseBody = ex.Message
                 };
-                return result;
+                return response;
             }
+        }
+
+        public bool CheckSign(string responseXml)
+        {
+            var dic = Tools.XmlToDictionary(responseXml);
+            if (dic["return_code"].ToString() != "SUCCESS")
+            {
+                return false;
+            }
+            var sign = dic["sign"].ToString();
+            var signStr = dic.ToSortQueryParameters(false, "sign") + "&key=" + weChatPayOptions.Key;
+            if (Tools.GetMD5(signStr).ToUpper() == sign)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

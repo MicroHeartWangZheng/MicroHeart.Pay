@@ -28,13 +28,13 @@ namespace Pay.WeChatPay
             //验签
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
 
-            var response = Tools.DeserializeToObject<WeChatPayRefundNotifyResponse>(body);
+            var response = Tools.XmlToObject<WeChatPayRefundNotifyResponse>(body);
 
             var key = Tools.GetMD5(Options.Key).ToLower();
 
             var data = AES.Decrypt(response.ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
 
-            var information = Tools.DeserializeToObject<EncryptedInformation>(data);
+            var information = Tools.XmlToObject<EncryptedInformation>(data);
 
 
             //业务处理
