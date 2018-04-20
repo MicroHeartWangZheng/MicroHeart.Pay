@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Pay.Common.Util;
 using Pay.WeChatPay.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,56 +14,58 @@ namespace Pay.WeChatPay
 {
     public class WeChatPayNotifyClient
     {
-        public WeChatPayOptions Options { get; set; }
+        public WeChatPayOptions weChatPayOptions { get; set; }
 
-        public virtual ILogger<WeChatPayNotifyClient> Logger { get; set; }
+        Dictionary<string, object> resultDictionary;
 
         public WeChatPayNotifyClient(
             IOptions<WeChatPayOptions> optionsAccessor
             )
         {
-            Options = optionsAccessor?.Value;
+            weChatPayOptions = optionsAccessor?.Value;
         }
 
-        public async Task<WeChatPayNotifyResponse> AcceptNotice(HttpRequest request)
+        public async Task<string> AcceptNotice(HttpRequest request)
         {
             //验签
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
 
-            var response = Tools.XmlToObject<WeChatPayRefundNotifyResponse>(body);
+            resultDictionary = new Dictionary<string, object>();
 
-            var key = Tools.GetMD5(Options.Key).ToLower();
-
-            var data = AES.Decrypt(response.ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
-
-            var information = Tools.XmlToObject<EncryptedInformation>(data);
-
-
-            //业务处理
-
-            return new WeChatPayNotifyResponse()
+            if (!CheckSign(body))
             {
-                ReturnCode = "SUCCESS"
-            };
+                resultDictionary.Add("return_code", "FAIL");
+                resultDictionary.Add("return_msg", "验签失败");
+
+                return resultDictionary.ToXmlString();
+            }
+            var key = Tools.GetMD5(weChatPayOptions.Key).ToLower();
+
+            var weChatPayRefundNotifyResponse = Tools.XmlToObject<WeChatPayRefundNotifyResponse>(body);
+            
+            var data = AES.Decrypt(weChatPayRefundNotifyResponse.ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
+
+            var info = Tools.XmlToObject<EncryptedInformation>(data);
+            //处理info
+
+            resultDictionary.Add("return_code", "SUCCESS");
+            return resultDictionary.ToXmlString();
         }
 
-        //private void CheckNotifySign(WeChatPayNotifyResponse response)
-        //{
-        //    if (response?.Parameters?.Count == 0)
-        //    {
-        //        throw new Exception("sign check fail: Body is Empty!");
-        //    }
-
-        //    if (!response.Parameters.TryGetValue("sign", out var sign))
-        //    {
-        //        throw new Exception("sign check fail: sign is Empty!");
-        //    }
-
-        //    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, Options.Key);
-        //    if (cal_sign != sign)
-        //    {
-        //        throw new Exception("sign check fail: check Sign and Data Fail!");
-        //    }
-        //}
+        public bool CheckSign(string responseXml)
+        {
+            var dic = Tools.XmlToDictionary(responseXml);
+            if (dic["return_code"].ToString() != "SUCCESS")
+            {
+                return false;
+            }
+            var sign = dic["sign"].ToString();
+            var signStr = dic.ToSortQueryParameters(false, "sign") + "&key=" + weChatPayOptions.Key;
+            if (Tools.GetMD5(signStr).ToUpper() == sign)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
