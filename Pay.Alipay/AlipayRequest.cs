@@ -9,5 +9,10 @@ namespace Pay.Alipay
     public abstract class AlipayRequest<TResponse> : BaseRequest<TResponse> where TResponse : BaseResponse, new()
     {
         public override bool NeedCertificate => false;
+
+        public override HttpMethod GetHttpMethod()
+        {
+            return HttpMethod.Post;
+        }
     }
 }
