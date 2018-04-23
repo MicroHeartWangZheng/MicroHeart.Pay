@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Pay.Alipay.Response
 {
@@ -10,13 +7,13 @@ namespace Pay.Alipay.Response
         /// <summary>
         /// 创建交易传入的商户订单号
         /// </summary>
-        [XmlElement("out_trade_no")]
+        [JsonProperty("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 支付宝交易号
         /// </summary>
-        [XmlElement("trade_no")]
+        [JsonProperty("trade_no")]
         public string TradeNo { get; set; }
     }
 }
