@@ -20,8 +20,6 @@ namespace Pay.WeChatPay
 
         private WeChatPayOptions weChatPayOptions { get; set; }
 
-        protected internal HttpClientEx CertificateClient { get; set; }
-
         public override string Name => "wx";
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
