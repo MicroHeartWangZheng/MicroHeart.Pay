@@ -10,7 +10,7 @@ namespace Aop.Api.Request
     /// <summary>
     /// 交易退款查询
     /// </summary>
-    public class AlipayTradeFastpayRefundQueryRequest : IAlipayRequest<AlipayTradeFastpayRefundQueryResponse>
+    public class AlipayTradeFastpayRefundQueryRequest : AlipayRequest<AlipayTradeFastpayRefundQueryResponse>
     {
         /// <summary>
         /// 支付宝交易号，和商户订单号不能同时为空

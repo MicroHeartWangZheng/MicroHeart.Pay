@@ -10,7 +10,7 @@ namespace Pay.Alipay.Request
     /// <summary>
     /// 收银员通过收银台或商户后台调用支付宝接口，生成二维码后，展示给用户，由用户扫描二维码完成订单支付。
     /// </summary>
-    public class AlipayTradePrecreateRequest : IAlipayRequest<AlipayTradePrecreateResponse>
+    public class AlipayTradePrecreateRequest : AlipayRequest<AlipayTradePrecreateResponse>
     {
         /// <summary>
         /// 商户订单号,64个字符以内、只能包含字母、数字、下划线；需保证在商户端不重复

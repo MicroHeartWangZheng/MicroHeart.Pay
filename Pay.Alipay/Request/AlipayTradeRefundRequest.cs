@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Pay.Alipay.Request
 {
-    public class AlipayTradeRefundRequest : IAlipayRequest<AlipayTradeRefundResponse>
+    public class AlipayTradeRefundRequest : AlipayRequest<AlipayTradeRefundResponse>
     {
         #region 请求参数
         /// <summary>

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Pay.Alipay.Request
 {
-    public class AlipayTradeCancelRequest : IAlipayRequest<AlipayTradeCancelResponse>
+    public class AlipayTradeCancelRequest : AlipayRequest<AlipayTradeCancelResponse>
     {
         /// <summary>
         /// 原支付请求的商户订单号,和支付宝交易号不能同时为空

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Pay.Alipay.Request
 {
-    public class AlipayTradeCloseRequest : IAlipayRequest<AlipayTradeCloseResponse>
+    public class AlipayTradeCloseRequest : AlipayRequest<AlipayTradeCloseResponse>
     {
         /// <summary>
         /// 该交易在支付宝系统中的交易流水号。最短 16 位，最长 64 位。和out_trade_no不能同时为空，如果同时传了 out_trade_no和 trade_no，则以 trade_no为准。

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Pay.Alipay.Request
 {
-    public class AlipayTradeQueryRequest : IAlipayRequest<AlipayTradeQueryResponse>
+    public class AlipayTradeQueryRequest : AlipayRequest<AlipayTradeQueryResponse>
     {
         /// <summary>
         /// 订单支付时传入的商户订单号,和支付宝交易号不能同时为空。  trade_no,out_trade_no如果同时存在优先取trade_no

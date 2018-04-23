@@ -8,7 +8,7 @@ namespace Pay.Alipay.Request
     /// <summary>
     /// 商户通过该接口进行交易的创建下单
     /// </summary>
-    public class AlipayTradeCreateRequest : IAlipayRequest<AlipayTradeCreateResponse>
+    public class AlipayTradeCreateRequest : AlipayRequest<AlipayTradeCreateResponse>
     {
         /// <summary>
         /// 商户订单号,64个字符以内、只能包含字母、数字、下划线；需保证在商户端不重复

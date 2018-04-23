@@ -8,7 +8,7 @@ namespace Pay.Alipay.Request
     /// <summary>
     /// Alipay API: alipay.trade.pay
     /// </summary>
-    public class AlipayTradePayRequest : IAlipayRequest<AlipayTradePayResponse>
+    public class AlipayTradePayRequest : AlipayRequest<AlipayTradePayResponse>
     {
         #region ²ÎÊý
         /// <summary>
