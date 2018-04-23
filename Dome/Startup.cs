@@ -26,9 +26,9 @@ namespace Dome
         {
             services.AddMvc();
 
+            services.AddWeChatPay();
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
-            services.AddSingleton<WeChatPayClient>();
-            services.AddSingleton<WeChatPayNotifyClient>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
