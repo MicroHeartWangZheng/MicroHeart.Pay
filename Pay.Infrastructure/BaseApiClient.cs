@@ -16,7 +16,7 @@ namespace Pay.Infrastructure
     {
         protected static HttpClient httpClient;
 
-        protected readonly string RandomString = Tools.GetRandomString(2);
+        protected readonly string RandomString = Tools.GetRandomString(1);
 
 
         protected BaseApiClient()

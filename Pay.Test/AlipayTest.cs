@@ -24,7 +24,7 @@ namespace Pay.Test
             {
                 OutTradeNo = guid,
                 Scene = "bar_code",
-                AuthCode = "134915471463379363",
+                AuthCode = "283143982778473779",
                 Subject = "商品标题",
                 TotalAmount = 0.01m
             });

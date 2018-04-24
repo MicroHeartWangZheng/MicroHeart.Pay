@@ -19,9 +19,7 @@ namespace Pay.Infrastructure
         public virtual IDictionary<string, object> GetParameters()
         {
             IDictionary<string, object> parameters = new Dictionary<string, object>();
-            if (parameters != null)
-                return parameters;
-
+           
             var properties = this.GetType().GetProperties().Where(m => m != null);
 
             parameters = properties.ToDictionary(m => ((JsonPropertyAttribute)m.GetCustomAttributes(typeof(JsonPropertyAttribute), false).First()).PropertyName, n => n.GetValue(this, null));

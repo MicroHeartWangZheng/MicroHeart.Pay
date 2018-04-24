@@ -14,10 +14,10 @@ namespace Pay.Alipay
             alipayConfig = alipayConfig ?? new AlipayConfig()
             {
                 ApiUrl = "https://openapi.alipay.com/gateway.do",
-                AppId = "2017071807795666",
+                AppId = "2018042460038158",
                 MediaType = "application/json",
                 Charset = "utf-8",
-                PrivateKeyPath = @"C:\Users\Administrator\Desktop\privateKey.pem"
+                PrivateKeyPath = @"C:\Users\Administrator\Desktop\myPrivateKey.pem"
             };
         }
 
@@ -42,7 +42,8 @@ namespace Pay.Alipay
             dic.Add("sign", GetSign(request));
             dic.Add("timestamp", RandomString);
             dic.Add("version", "1.0");
-            dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
+            var a = JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary());
+            dic.Add("biz_content", JsonConvert.SerializeObject(a));
 
             return JsonConvert.SerializeObject(dic);
         }
@@ -56,7 +57,8 @@ namespace Pay.Alipay
             dic.Add("sign_type", "RSA2");
             dic.Add("timestamp", RandomString);
             dic.Add("version", "1.0");
-            dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
+            var a = JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary());
+            dic.Add("biz_content", JsonConvert.SerializeObject(a));
 
             return Signature.RSASign(dic, alipayConfig.PrivateKeyPath, alipayConfig.Charset, "RSA2");
         }

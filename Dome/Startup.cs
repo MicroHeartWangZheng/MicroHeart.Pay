@@ -26,7 +26,7 @@ namespace Dome
         {
             services.AddMvc();
 
-            services.AddWeChatPay();
+            //services.AddWeChatPay();
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
             
         }
