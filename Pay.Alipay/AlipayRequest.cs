@@ -1,4 +1,5 @@
-﻿using Pay.Infrastructure;
+﻿using Newtonsoft.Json;
+using Pay.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -6,13 +7,12 @@ using System.Net.Http;
 namespace Pay.Alipay
 {
 
-    public abstract class AlipayRequest<TResponse> : BaseRequest<TResponse> where TResponse : BaseResponse, new()
+    public abstract class AlipayRequest<TResponse> : BaseRequest<TResponse>, IRequest<TResponse> where TResponse : AlipayResponse, new()
     {
-        public override bool NeedCertificate => false;
-
         public override HttpMethod GetHttpMethod()
         {
             return HttpMethod.Post;
         }
+
     }
 }

@@ -1,16 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using Pay.Common.Util;
 using Pay.Infrastructure;
-using Pay.WeChatPay.Utility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace Pay.WeChatPay
 {
@@ -101,7 +96,7 @@ namespace Pay.WeChatPay
 
         public override string MediaType => "text/xml";
 
-        public override async Task<TResponse> ExecuteAsync<TResponse>(IRequest<TResponse> request)
+        public async Task<TResponse> Execute<TResponse>(WeChatPayRequest<TResponse> request) where TResponse : WeChatPayResponse, new()
         {
             TResponse response;
             try

@@ -15,7 +15,6 @@ namespace Pay.Infrastructure
     public abstract class BaseApiClient : IApiClient
     {
         protected static HttpClient httpClient;
-        public InterfaceConfiguration InterfaceConfiguration { set; get; }
 
         protected readonly string RandomString = Tools.GetRandomString(2);
 
@@ -115,19 +114,6 @@ namespace Pay.Infrastructure
                 return;
             }
             response.DownloadFile();
-        }
-
-        protected InterfaceConfiguration CheckInterfaceConfiguration()
-        {
-            if (this.InterfaceConfiguration == null
-                || string.IsNullOrWhiteSpace(this.InterfaceConfiguration.ApiUrl)
-                || string.IsNullOrWhiteSpace(InterfaceConfiguration.AppId)
-                || string.IsNullOrWhiteSpace(InterfaceConfiguration.Secret))
-            {
-                throw new Exception("请提交接口配置信息");
-            }
-
-            return InterfaceConfiguration;
         }
 
         /// <summary>

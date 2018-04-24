@@ -21,11 +21,6 @@ namespace Pay.Infrastructure
         /// <returns></returns>
         System.Net.Http.HttpMethod GetHttpMethod();
 
-
-        /// <summary>
-        /// 是否需要证书
-        /// </summary>
-        bool NeedCertificate { get; }
     }
 
     public interface IRequest<out TResponse> : IRequest where TResponse : BaseResponse, new()

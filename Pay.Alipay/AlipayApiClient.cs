@@ -8,14 +8,16 @@ namespace Pay.Alipay
 {
     public class AlipayClient : BaseApiClient
     {
+        private static AlipayConfig alipayConfig { get; set; }
         public AlipayClient()
         {
-            this.InterfaceConfiguration = new InterfaceConfiguration()
+            alipayConfig = alipayConfig ?? new AlipayConfig()
             {
                 ApiUrl = "https://openapi.alipay.com/gateway.do",
-                AppId = "xxxx",
+                AppId = "2017071807795666",
                 MediaType = "application/json",
-                Charset = "utf-8"
+                Charset = "utf-8",
+                PrivateKeyPath = @"C:\Users\Administrator\Desktop\privateKey.pem"
             };
         }
 
@@ -23,7 +25,7 @@ namespace Pay.Alipay
 
         public override string GetRequestUri(IRequest request)
         {
-            return this.InterfaceConfiguration.ApiUrl + "/" + request.GetApiName();
+            return alipayConfig.ApiUrl;
         }
 
         public override string GetRequestBody(IRequest request)
@@ -33,9 +35,9 @@ namespace Pay.Alipay
                 return string.Empty;
             }
             var dic = new Dictionary<string, object>();
-            dic.Add("app_id", this.InterfaceConfiguration.AppId);
+            dic.Add("app_id", alipayConfig.AppId);
             dic.Add("method", request.GetApiName());
-            dic.Add("charset", this.InterfaceConfiguration.Charset);
+            dic.Add("charset", alipayConfig.Charset);
             dic.Add("sign_type", "RSA2");
             dic.Add("sign", GetSign(request));
             dic.Add("timestamp", RandomString);
@@ -48,17 +50,17 @@ namespace Pay.Alipay
         public override string GetSign(IRequest request)
         {
             var dic = new Dictionary<string, string>();
-            dic.Add("app_id", this.InterfaceConfiguration.AppId);
+            dic.Add("app_id", alipayConfig.AppId);
             dic.Add("method", request.GetApiName());
-            dic.Add("charset", this.InterfaceConfiguration.Charset);
+            dic.Add("charset", alipayConfig.Charset);
             dic.Add("sign_type", "RSA2");
             dic.Add("timestamp", RandomString);
             dic.Add("version", "1.0");
             dic.Add("biz_content", request.GetParameters().ToSortQueryParameters());
 
-            return Signature.RSASign(dic, "xxx", this.InterfaceConfiguration.Charset, "RSA2");
+            return Signature.RSASign(dic, alipayConfig.PrivateKeyPath, alipayConfig.Charset, "RSA2");
         }
 
-        public override string MediaType => "application/json";
+        //public override string MediaType => "application/json";
     }
 }

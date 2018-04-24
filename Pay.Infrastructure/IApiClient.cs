@@ -7,8 +7,6 @@ namespace Pay.Infrastructure
 {
     public interface IApiClient
     {
-        InterfaceConfiguration InterfaceConfiguration { set; get; }
-
         /// <summary>
         /// 获取第三方接口的名称
         /// </summary>

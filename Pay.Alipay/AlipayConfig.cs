@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pay.Infrastructure
+namespace Pay.Alipay
 {
-    public class InterfaceConfiguration
+    public class AlipayConfig
     {
         /// <summary>
-        /// 设置或获取第三方接口的AppId
+        /// appid
         /// </summary>
         public string AppId { set; get; }
         /// <summary>
-        /// 设置或获取第三方接口的安全码
+        /// 私钥
         /// </summary>
-        public string Secret { set; get; }
+        public string PrivateKeyPath { set; get; }
         /// <summary>
-        /// 设置或获取第三方接口的ApiUrl
+        /// 接口
         /// </summary>
         public string ApiUrl { set; get; }
         /// <summary>
         /// 设置或获取第三方接口的MediaType
         /// </summary>
         public string MediaType { set; get; }
-       
+
         /// <summary>
         /// 编码格式
         /// </summary>
