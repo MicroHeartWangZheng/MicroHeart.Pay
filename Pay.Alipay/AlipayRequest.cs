@@ -11,7 +11,7 @@ namespace Pay.Alipay
     {
         public override HttpMethod GetHttpMethod()
         {
-            return HttpMethod.Post;
+            return HttpMethod.Get;
         }
 
     }

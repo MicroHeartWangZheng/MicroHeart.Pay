@@ -29,7 +29,7 @@ namespace Pay.Infrastructure
             TResponse result;
             try
             {
-                var requestUri = GetRequestUri(request);
+                 var requestUri = GetRequestUri(request);
 
                 var requestMessage = new HttpRequestMessage(request.GetHttpMethod(), requestUri)
                 {

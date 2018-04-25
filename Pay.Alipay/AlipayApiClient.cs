@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Pay.Common.Util;
 using Pay.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
@@ -8,16 +9,18 @@ namespace Pay.Alipay
 {
     public class AlipayClient : BaseApiClient
     {
-        private static AlipayConfig alipayConfig { get; set; }
+        private static AlipayConfig AlipayConfig { get; set; }
+
+        private string TimeStamp;
         public AlipayClient()
         {
-            alipayConfig = alipayConfig ?? new AlipayConfig()
+            TimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            AlipayConfig = AlipayConfig ?? new AlipayConfig()
             {
                 ApiUrl = "https://openapi.alipay.com/gateway.do",
                 AppId = "2018042460038158",
-                MediaType = "application/json",
                 Charset = "utf-8",
-                PrivateKeyPath = @"C:\Users\Administrator\Desktop\myPrivateKey.pem"
+                PrivateKey = @"C:\Users\Administrator\Desktop\myPrivateKey.pem"
             };
         }
 
@@ -25,44 +28,48 @@ namespace Pay.Alipay
 
         public override string GetRequestUri(IRequest request)
         {
-            return alipayConfig.ApiUrl;
+            var dic = new Dictionary<string, object>();
+            dic.Add("app_id", AlipayConfig.AppId);
+            dic.Add("method", request.GetApiName());
+            dic.Add("charset", AlipayConfig.Charset);
+            dic.Add("sign_type", "RSA2");
+            dic.Add("sign", GetSign(request));
+            dic.Add("timestamp", TimeStamp);
+            dic.Add("version", "1.0");
+            var a = JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary(), Formatting.None);
+
+            dic.Add("biz_content", a);
+
+            var c = dic.ToSortQueryParameters();
+            return AlipayConfig.ApiUrl + "?" + c;
         }
 
         public override string GetRequestBody(IRequest request)
         {
-            if (request.GetHttpMethod() == HttpMethod.Get)
-            {
-                return string.Empty;
-            }
-            var dic = new Dictionary<string, object>();
-            dic.Add("app_id", alipayConfig.AppId);
-            dic.Add("method", request.GetApiName());
-            dic.Add("charset", alipayConfig.Charset);
-            dic.Add("sign_type", "RSA2");
-            dic.Add("sign", GetSign(request));
-            dic.Add("timestamp", RandomString);
-            dic.Add("version", "1.0");
-            var a = JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary());
-            dic.Add("biz_content", JsonConvert.SerializeObject(a));
+            return string.Empty;
+            //if (request.GetHttpMethod() == HttpMethod.Get)
+            //{
+            //    return string.Empty;
+            //}
 
-            return JsonConvert.SerializeObject(dic);
         }
 
         public override string GetSign(IRequest request)
         {
             var dic = new Dictionary<string, string>();
-            dic.Add("app_id", alipayConfig.AppId);
+            dic.Add("app_id", AlipayConfig.AppId);
             dic.Add("method", request.GetApiName());
-            dic.Add("charset", alipayConfig.Charset);
+            dic.Add("charset", AlipayConfig.Charset);
             dic.Add("sign_type", "RSA2");
-            dic.Add("timestamp", RandomString);
+            dic.Add("timestamp", TimeStamp);
             dic.Add("version", "1.0");
-            var a = JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary());
-            dic.Add("biz_content", JsonConvert.SerializeObject(a));
+            var a = JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary(),Formatting.None);
 
-            return Signature.RSASign(dic, alipayConfig.PrivateKeyPath, alipayConfig.Charset, "RSA2");
+            dic.Add("biz_content", a);
+
+            return Signature.RSASign(dic, AlipayConfig.PrivateKey, AlipayConfig.Charset, "RSA2");
         }
 
-        //public override string MediaType => "application/json";
+        public override string MediaType => "application/x-www-form-urlencoded";
     }
 }

@@ -13,15 +13,11 @@ namespace Pay.Alipay
         /// <summary>
         /// 私钥
         /// </summary>
-        public string PrivateKeyPath { set; get; }
+        public string PrivateKey { set; get; }
         /// <summary>
         /// 接口
         /// </summary>
         public string ApiUrl { set; get; }
-        /// <summary>
-        /// 设置或获取第三方接口的MediaType
-        /// </summary>
-        public string MediaType { set; get; }
 
         /// <summary>
         /// 编码格式

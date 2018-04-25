@@ -40,40 +40,40 @@ namespace Pay.Common.Util
             var result = string.Join("&", sortDict.ToArray());
             return result;
         }
+        /// <summary>
+        /// 将指定的字典转换成按属性名称排序过的查询参数
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <param name="urlencode"></param>
+        /// <param name="exclude">排除的参数</param>
+        /// <returns></returns>
+        public static string ToSortQueryParameters(this IDictionary<string, string> dict, bool urlencode = false, params string[] exclude)
+        {
+            var sortDict = dict.OrderBy(m => m.Key).Select(m =>
+            {
+                if (m.Value == null || exclude.Contains(m.Key))
+                    return null;
+                if (m.Value is string && (string)m.Value == string.Empty)
+                {
+                    return null;
+                }
+                var val = m.Value.ToString();
+                var encodeVal = "";
+                if (urlencode)
+                {
+                    encodeVal += HttpUtility.UrlEncode(val.ToString());
+                }
+                else
+                {
+                    encodeVal = val;
+                }
+                return $"{m.Key}={encodeVal}";
+            }).Where(m => m != null);
+            var result = string.Join("&", sortDict.ToArray());
+            return result;
+        }
 
-
-        ///// <summary>
-        ///// 将指定的字典转换成按属性名称排序过的查询参数
-        ///// </summary>
-        ///// <param name="dict"></param>
-        ///// <param name="urlencode"></param>
-        ///// <param name="exclude">排除的参数</param>
-        ///// <returns></returns>
-        //public static string ToSortQueryParameters(this IDictionary<string, object> dict, bool urlencode = false, params string[] exclude)
-        //{
-        //    var sortDict = dict.OrderBy(m => m.Key).Select(m =>
-        //    {
-        //        if (m.Value == null || exclude.Contains(m.Key))
-        //            return null;
-        //        if (m.Value is string && (string)m.Value == string.Empty)
-        //        {
-        //            return null;
-        //        }
-        //        var val = m.Value.ToString();
-        //        var encodeVal = "";
-        //        if (urlencode)
-        //        {
-        //            encodeVal += HttpUtility.UrlEncode(val.ToString());
-        //        }
-        //        else
-        //        {
-        //            encodeVal = val;
-        //        }
-        //        return $"{m.Key}={encodeVal}";
-        //    }).Where(m => m != null);
-        //    var result = string.Join("&", sortDict.ToArray());
-        //    return result;
-        //}
+      
 
         /// <summary>
         /// 将字典对象转换为Xml字符串

@@ -141,9 +141,6 @@ namespace Pay.Alipay.Request
             return "alipay.trade.pay";
         }
 
-        public override HttpMethod GetHttpMethod()
-        {
-            return HttpMethod.Post;
-        }
+       
     }
 }
