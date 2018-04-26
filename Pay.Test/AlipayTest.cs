@@ -22,9 +22,9 @@ namespace Pay.Test
 
             var a = await alipayClient.ExecuteAsync(new AlipayTradePayRequest()
             {
+                AuthCode = "284340783975593459",
                 OutTradeNo = guid,
                 Scene = "bar_code",
-                AuthCode = "283143982778473779",
                 Subject = "biaoti",
                 TotalAmount = 0.01m
             });
