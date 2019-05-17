@@ -15,7 +15,7 @@ namespace Pay.WeChatPay
 
         private WeChatPayOptions weChatPayOptions { get; set; }
 
-        public override string Name => "wx";
+        public override string Name => "微信";
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
         {

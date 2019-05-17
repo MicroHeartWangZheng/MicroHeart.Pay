@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Pay.Common.Util;
 using Pay.Infrastructure;
 using System;
@@ -10,13 +11,13 @@ namespace Pay.Alipay
 {
     public class AlipayClient : BaseApiClient
     {
-        private static AlipayConfig AlipayConfig { get; set; }
+        private static AlipayOptions alipayOptions { get; set; }
 
         private string TimeStamp;
-        public AlipayClient()
+        public AlipayClient(IOptions<AlipayOptions> optionsAccessor)
         {
             TimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            AlipayConfig = AlipayConfig ?? new AlipayConfig()
+            alipayOptions = optionsAccessor?.Value ?? new AlipayOptions()
             {
                 ApiUrl = "https://openapi.alipay.com/gateway.do",
                 AppId = "2017071807795666",
@@ -25,14 +26,14 @@ namespace Pay.Alipay
             };
         }
 
-        public override string Name => "zfb";
+        public override string Name => "支付宝";
 
         public override string GetRequestUri(IRequest request)
         {
             var dic = new Dictionary<string, object>();
-            dic.Add("app_id", AlipayConfig.AppId);
+            dic.Add("app_id", alipayOptions.AppId);
             dic.Add("method", request.GetApiName());
-            dic.Add("charset", AlipayConfig.Charset);
+            dic.Add("charset", alipayOptions.Charset);
             dic.Add("sign_type", "RSA2");
             dic.Add("sign", GetSign(request));
             dic.Add("timestamp", TimeStamp);
@@ -40,7 +41,7 @@ namespace Pay.Alipay
 
             dic.Add("biz_content", JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary(), Formatting.None));
 
-            return AlipayConfig.ApiUrl + "?" + dic.ToSortQueryParameters(true);
+            return alipayOptions.ApiUrl + "?" + dic.ToSortQueryParameters(true);
         }
 
         public override string GetRequestBody(IRequest request)
@@ -51,16 +52,16 @@ namespace Pay.Alipay
         public override string GetSign(IRequest request)
         {
             var dic = new Dictionary<string, string>();
-            dic.Add("app_id", AlipayConfig.AppId);
+            dic.Add("app_id", alipayOptions.AppId);
             dic.Add("method", request.GetApiName());
-            dic.Add("charset", AlipayConfig.Charset);
+            dic.Add("charset", alipayOptions.Charset);
             dic.Add("sign_type", "RSA2");
             dic.Add("timestamp", TimeStamp);
             dic.Add("version", "1.0");
 
             dic.Add("biz_content", JsonConvert.SerializeObject(request.GetParameters().CleanupDictionary(), Formatting.None));
 
-            return Signature.RSASign(dic, AlipayConfig.PrivateKey, AlipayConfig.Charset, false, "RSA2");
+            return Signature.RSASign(dic, alipayOptions.PrivateKey, alipayOptions.Charset, false, "RSA2");
         }
 
         public override string MediaType => "application/x-www-form-urlencoded";

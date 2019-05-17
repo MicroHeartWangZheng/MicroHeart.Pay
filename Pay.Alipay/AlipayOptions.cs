@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Pay.Alipay
 {
-    public class AlipayConfig
+    //阿里配置
+    public class AlipayOptions
     {
         /// <summary>
         /// appid
