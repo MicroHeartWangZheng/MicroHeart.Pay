@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroHeart.WeChatPay", "MicroHeart.WeChatPay\MicroHeart.WeChatPay.csproj", "{8D2CFFA0-7401-4533-A9D8-6FAC2A05B7C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroHeart.Client", "MicroHeart.Client\MicroHeart.Client.csproj", "{A2F0732F-7967-43A6-A30A-81516436C57D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroHeart.AliPay", "MicroHeart.AliPay\MicroHeart.AliPay.csproj", "{F3085986-C8C7-4563-B400-FB83A1AEFAB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D2CFFA0-7401-4533-A9D8-6FAC2A05B7C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2CFFA0-7401-4533-A9D8-6FAC2A05B7C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2CFFA0-7401-4533-A9D8-6FAC2A05B7C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2CFFA0-7401-4533-A9D8-6FAC2A05B7C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F0732F-7967-43A6-A30A-81516436C57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F0732F-7967-43A6-A30A-81516436C57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F0732F-7967-43A6-A30A-81516436C57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F0732F-7967-43A6-A30A-81516436C57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3085986-C8C7-4563-B400-FB83A1AEFAB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3085986-C8C7-4563-B400-FB83A1AEFAB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3085986-C8C7-4563-B400-FB83A1AEFAB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3085986-C8C7-4563-B400-FB83A1AEFAB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D5C1E37-E752-4A5D-84C2-61610533AB28}
+	EndGlobalSection
+EndGlobal
