@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 
-namespace MicroHeart.WeChatPay
+namespace MicroHeart.WeChatPay.Request
 {
     public abstract class WeChatPayRequest<TResponse> : BaseRequest<TResponse> where TResponse : BaseResponse, new()
     {

@@ -1,7 +1,7 @@
 ﻿using MicroHeart.Client;
 using Newtonsoft.Json;
 
-namespace MicroHeart.WeChatPay
+namespace MicroHeart.WeChatPay.Response
 {
     public abstract class WeChatPayResponse : BaseResponse
     {

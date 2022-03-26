@@ -1,6 +1,7 @@
 ﻿using MicroHeart.Client;
 using MicroHeart.Client.Util;
 using Microsoft.Extensions.Options;
+using Pay.WeChatPay.Options;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +15,7 @@ namespace Pay.WeChatPay
         public override string Name => "微信";
 
         private WeChatPayOptions weChatPayOptions { get; set; }
+
         private string RandomString { get; set; }
 
         public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor,

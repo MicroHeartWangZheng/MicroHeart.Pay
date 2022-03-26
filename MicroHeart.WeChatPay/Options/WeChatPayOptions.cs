@@ -1,4 +1,4 @@
-﻿namespace Pay.WeChatPay
+﻿namespace Pay.WeChatPay.Options
 {
     public class WeChatPayOptions
     {
