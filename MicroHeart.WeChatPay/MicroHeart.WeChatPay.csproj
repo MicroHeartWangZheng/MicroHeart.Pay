@@ -3,7 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
+    <Authors>MicroHeart</Authors>
+    <Description>微信支付分装</Description>
+    <RepositoryUrl>https://github.com/MicroHeartWangZheng/MicroHeart.Pay.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
